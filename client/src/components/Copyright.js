@@ -3,9 +3,10 @@ import { Typography } from "@material-ui/core";
 import { Link } from "@material-ui/core";
 
 
-function Copyright() {
+function Copyright({color}) {
+  console.log(`color:${color}`)
     return (
-      <Typography variant="body2" color="textSecondary" align="center">
+      <Typography variant="body2" style={{color:`${color}`}} align="center">
         {'Copyright © '}
         <Link color="inherit" href="https://material-ui.com/">
           Camp Memo

@@ -45,8 +45,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundSize: 'cover',
     width:'100vw',
     height: 'calc(100vh - 64px)',
-    background: 'linear-gradient(rgba( 255, 255, 255, 0.5), rgba( 255, 255, 255, 0.5)),url(https://images.unsplash.com/photo-1525811902-f2342640856e?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NDR8fGNhbXBpbmd8ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60)'
-   
+    background: 'linear-gradient(rgba( 255, 255, 255, 0.3), rgba( 255, 255, 255, 0.3)),url(https://images.unsplash.com/photo-1525811902-f2342640856e?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NDR8fGNhbXBpbmd8ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60)'
   },
   formContainer:{
     boxShadow:'1px 3px 5px 0px rgba(0,0,0,0.35)',
@@ -58,6 +57,9 @@ const useStyles = makeStyles((theme) => ({
   },
   formIcon:{
    fontSize:'70px',
+  },
+  formtitle:{
+    marginBottom:20
   }
 }));
 
@@ -71,9 +73,9 @@ export default function SignIn() {
         
         <div className={classes.paper}>
         <AccountCircleIcon  className={classes.formIcon} color="primary"/>
-        {/* <Typography component="h1" variant="h5">
-          Sign in
-        </Typography> */}
+        <Typography component="h1" variant="h5" className={classes.formtitle}>
+            Welcome Back
+        </Typography>
           <form className={classes.form} noValidate>
             <TextField
               variant="outlined"
@@ -117,7 +119,7 @@ export default function SignIn() {
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="#" variant="body2" color="secondary">
+                <Link href="/register" variant="body2" color="secondary">
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>
@@ -125,7 +127,7 @@ export default function SignIn() {
           </form>
         </div>
         <Box mt={8}>
-          <Copyright />
+          <Copyright color='#010101' />
         </Box>
         </Grid>
         </Grid>

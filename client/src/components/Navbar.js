@@ -3,8 +3,7 @@ import { createTheme, makeStyles, ThemeProvider } from '@material-ui/core/styles
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
-import { amber } from '@material-ui/core/colors';
-
+import { Link } from 'react-router-dom';
 const theme = createTheme({
   palette: {
     primary: {
@@ -23,25 +22,26 @@ const useStyles = makeStyles((theme) => ({
     btn:{
         marginRight:"10px"
     }
-  
-   
   }));
 
 const Navbar=()=>{
     const classes = useStyles();
 
     return(
-        
-        <AppBar position="static">
+      <AppBar position="static">
         <Toolbar style={{backgroundColor:"white",zIndex:99,boxShadow:"0px 0px 6px 0px rgba(0,0,0,0.25)"}}>
          <div className={classes.root}>
+           <a  href="/">
             <img src="/images/logo.png" alt="" style={{height:'60px',width:'140px'}} />
+           </a>
          </div>
          <ThemeProvider theme={theme}>
-          <Button className={classes.btn}>Create</Button>
-          <Button variant="outlined" color="primary">
-             Login
-          </Button>
+          <Button className={classes.btn} style={{borderRadius:'40px'}} >Create</Button>
+          <Link to='/login' className="link">
+              <Button variant="outlined" color="primary" style={{borderRadius:'40px'}}>
+                Login
+              </Button>
+          </Link>
           </ThemeProvider>
         </Toolbar>
       </AppBar>
