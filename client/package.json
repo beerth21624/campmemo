@@ -3,12 +3,25 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@canburaks/text-align-editorjs": "^1.0.4",
+    "@ckeditor/ckeditor5-build-classic": "^29.1.0",
+    "@ckeditor/ckeditor5-react": "^3.0.2",
+    "@editorjs/header": "^2.6.1",
+    "@editorjs/list": "^1.6.2",
+    "@editorjs/nested-list": "^1.0.2",
+    "@editorjs/underline": "^1.0.0",
     "@material-ui/core": "^4.12.3",
     "@material-ui/icons": "^4.11.2",
     "@material-ui/styles": "^4.11.4",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
+    "alloyeditor": "^2.14.2",
+    "editorjs-alert": "^1.0.3",
+    "editorjs-inline-image": "^0.1.4",
+    "editorjs-paragraph-with-alignment": "^3.0.0",
+    "editorjs-social-post-plugin": "^1.0.0",
+    "mui-rte": "^1.29.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-router-dom": "^5.2.0",
@@ -38,5 +51,19 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@editorjs/checklist": "^1.3.0",
+    "@editorjs/delimiter": "^1.2.0",
+    "@editorjs/editorjs": "^2.22.2",
+    "@editorjs/embed": "^2.4.6",
+    "@editorjs/image": "^2.6.0",
+    "@editorjs/marker": "^1.2.2",
+    "@editorjs/paragraph": "^2.8.0",
+    "@editorjs/quote": "^2.4.0",
+    "@editorjs/warning": "^1.2.0",
+    "editorjs-table": "^1.4.10",
+    "react-editor-js": "^1.10.0",
+    "simple-image-editorjs": "^1.4.0"
   }
 }

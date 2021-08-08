@@ -2,14 +2,13 @@ import React from 'react';
 import { createTheme, makeStyles, ThemeProvider } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
-import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
-import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { Grid } from '@material-ui/core';
 import { Box } from '@material-ui/core';
 import { Avatar } from '@material-ui/core';
+import {Link} from 'react-router-dom'
 
 const theme = createTheme({
   palette: {
@@ -57,6 +56,7 @@ const MainPost=()=>{
          <ThemeProvider theme={theme}>
              <Grid item md={6} style={{padding:'10px'}}>
                 <Card className={classes.root} square>
+                   <Link to={`/post/123456`} className="link">
                     <CardActionArea>
                         <div className={classes.card}>
                         <CardMedia
@@ -87,6 +87,7 @@ const MainPost=()=>{
                     <Typography variant='subtitle1' color="textSecondary" className={classes.boxitem}> 11 Nov 2000</Typography>
                     </Box>
                     </CardActionArea>
+                    </Link>
                 </Card>
              </Grid>
           </ThemeProvider>

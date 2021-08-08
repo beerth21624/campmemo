@@ -35,7 +35,7 @@ const Main=()=>{
     return(
          <ThemeProvider theme={theme}>
              <Grid md={12}>
-                 <Paper className={classes.root}>
+                 <Paper className={classes.root} square>
                    <div className={classes.copyright}>
                       <Copyright color="#FFFFFF" />
                    </div>

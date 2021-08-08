@@ -5,7 +5,6 @@ import HeaderFeature from '../components/Header/HeaderFeature'
 import Main from '../components/main/Main'
 import Sidebar from '../components/sidebar/Sidebar'
 import Footer from '../components/footer/Footer'
-import { Fragment } from 'react'
 function Home() {
     return (
         <div style={{backgroundColor:'#F3F3F3',backgroundSize:'cover'}}>

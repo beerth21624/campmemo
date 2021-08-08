@@ -36,7 +36,9 @@ const Navbar=()=>{
            </a>
          </div>
          <ThemeProvider theme={theme}>
+         <Link to='/editor' className="link">
           <Button className={classes.btn} style={{borderRadius:'40px'}} >Create</Button>
+          </Link>
           <Link to='/login' className="link">
               <Button variant="outlined" color="primary" style={{borderRadius:'40px'}}>
                 Login

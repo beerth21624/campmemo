@@ -1,12 +1,9 @@
 import React from 'react';
 import { createTheme, makeStyles, ThemeProvider } from '@material-ui/core/styles';
-import { Grid } from '@material-ui/core';
 import { Typography } from '@material-ui/core';
 import { Box } from '@material-ui/core';
 import { Button } from '@material-ui/core';
-import { Paper } from '@material-ui/core';
-import { border, height } from '@material-ui/system';
-import { red } from '@material-ui/core/colors';
+
 
 
 const theme = createTheme({
@@ -37,6 +34,12 @@ const useStyles = makeStyles((theme) => ({
           width:'50%'
         }
 
+    },
+    boxmargin:{
+      marginLeft:'20px',
+      [theme.breakpoints.down('sm')]:{
+        marginLeft:0,
+      }
     }
   }));
 
@@ -49,7 +52,7 @@ const Category=()=>{
              display='flex'
              flexDirection='column'
              marginTop='30px'
-             marginLeft='20px'
+             className={classes.boxmargin}
              >  
                 
                 <img className={classes.adimg} src='https://blogzine.webestica.com/assets/images/adv.png' alt='' />

@@ -1,8 +1,9 @@
 import React from 'react';
-import { createTheme, makeStyles, ThemeProvider } from '@material-ui/core/styles';
+import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 import { Grid } from '@material-ui/core';
-import Category from './Category';
-import NewPost from './NewPost';
+import Category from '../sidebar/Category';
+import NewPost from '../sidebar/NewPost';
+import Author from './Author'
 
 const theme = createTheme({
   palette: {
@@ -15,10 +16,11 @@ const theme = createTheme({
   },
 });
 
-const Sidebar=()=>{
+const PostSidebar=()=>{
     return(
          <ThemeProvider theme={theme}>
          <Grid item container md={3} direction='column'>
+          
            <Category />
            <NewPost />
           
@@ -26,4 +28,4 @@ const Sidebar=()=>{
           </ThemeProvider>
     )
 }
-export default Sidebar
+export default PostSidebar

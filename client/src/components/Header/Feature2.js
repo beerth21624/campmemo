@@ -1,8 +1,6 @@
 import React from 'react';
 import { createTheme, makeStyles, ThemeProvider } from '@material-ui/core/styles';
 import { Grid } from '@material-ui/core';
-import { Paper } from '@material-ui/core';
-import itemFeature from './ItemFeature'
 import ItemFeature from './ItemFeature';
 
 const theme = createTheme({
