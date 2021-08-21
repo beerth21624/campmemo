@@ -61,15 +61,15 @@ UserSchema.methods.getSignedJwtToken = function () {
   });
 };
 
-UserSchema.methods.getResetPasswordToken = function () {
-  const resetToken = crypto.randomBytes(20).toString('hex'); //เป็นการสร้างข้อทูลแบบสุ่มจะส่งคืนเป็นบัฟเฟอร์จึงต้องแปลงโดยใช้tostring(hex)คือแปงเป็นเลขฐาน16(0-9) A B C D F
-  this.resetPasswordToken = crypto
-    .createHash('sha256')
-    .update(resetToken)
-    .digest('hex');
+// UserSchema.methods.getResetPasswordToken = function () {
+//   const resetToken = crypto.randomBytes(20).toString('hex'); //เป็นการสร้างข้อทูลแบบสุ่มจะส่งคืนเป็นบัฟเฟอร์จึงต้องแปลงโดยใช้tostring(hex)คือแปงเป็นเลขฐาน16(0-9) A B C D F
+//   this.resetPasswordToken = crypto
+//     .createHash('sha256')
+//     .update(resetToken)
+//     .digest('hex');
 
-  this.resetPasswordExpire = Date.now() + 10 * (60 * 1000);
-  return resetToken;
-};
+//   this.resetPasswordExpire = Date.now() + 10 * (60 * 1000);
+//   return resetToken;
+// };
 
 module.exports = mongoose.model('User', UserSchema);
