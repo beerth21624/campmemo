@@ -8,6 +8,7 @@ import PostEditor from './pages/PostEditor';
 import SinglePost from './pages/SinglePost';
 import Profile from './pages/Profile';
 import ScrollToTop from './components/ScrollToTop';
+import CategoryShow from './pages/CategoryShow';
 import { AuthContext } from './context/authContext/AuthContext';
 function App() {
   const { user } = useContext(AuthContext);
@@ -29,6 +30,9 @@ function App() {
         </Route>
         <Route path="/profile">
           <Profile />
+        </Route>
+        <Route path="/category/:catId">
+          <CategoryShow />
         </Route>
       </ScrollToTop>
     </BrowserRouter>

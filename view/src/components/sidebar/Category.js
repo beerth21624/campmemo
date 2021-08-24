@@ -7,6 +7,7 @@ import {
 import { Typography } from '@material-ui/core';
 import { Box } from '@material-ui/core';
 import { Button } from '@material-ui/core';
+import { Link } from 'react-router-dom';
 
 const theme = createTheme({
   palette: {
@@ -20,6 +21,7 @@ const theme = createTheme({
 });
 const useStyles = makeStyles((theme) => ({
   category: {
+    width: '100%',
     margin: '0.3rem 0',
     height: '3.5rem',
     border: 'none',
@@ -63,20 +65,44 @@ const Category = () => {
         />
 
         <Typography variant="h5" gutterBottom>
-          <b>Trending topics</b>
+          <b>Category</b>
         </Typography>
-        <Button variant="outlined" color="primary" className={classes.category}>
-          camping
-        </Button>
-        <Button variant="outlined" color="primary" className={classes.category}>
-          camping
-        </Button>
-        <Button variant="outlined" color="primary" className={classes.category}>
-          camping
-        </Button>
-        <Button variant="outlined" color="primary" className={classes.category}>
-          camping
-        </Button>
+        <Link to="/category/camping" className="link">
+          <Button
+            variant="outlined"
+            color="primary"
+            className={classes.category}
+          >
+            camping
+          </Button>
+        </Link>
+        <Link to="/category/trekking" className="link">
+          <Button
+            variant="outlined"
+            color="primary"
+            className={classes.category}
+          >
+            trekking
+          </Button>
+        </Link>
+        <Link to="/category/climbing" className="link">
+          <Button
+            variant="outlined"
+            color="primary"
+            className={classes.category}
+          >
+            climbing
+          </Button>
+        </Link>
+        <Link to="/category/fishing" className="link">
+          <Button
+            variant="outlined"
+            color="primary"
+            className={classes.category}
+          >
+            fishing
+          </Button>
+        </Link>
       </Box>
     </ThemeProvider>
   );

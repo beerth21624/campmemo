@@ -10,7 +10,7 @@ import { Box } from '@material-ui/core';
 import { Typography } from '@material-ui/core';
 import Footer from '../components/footer/Footer';
 import EcoIcon from '@material-ui/icons/Eco';
-import ProfilePost from '../components/ProfilePost';
+import MediemCard from '../components/MediemCard';
 
 const theme = createTheme({
   palette: {
@@ -101,11 +101,12 @@ const Profile = () => {
                 flexDirection="column"
                 marginTop="100px"
               >
-                <ProfilePost />
-                <ProfilePost />
-                <ProfilePost />
-                <ProfilePost />
-                <ProfilePost />
+                <MediemCard />
+                <MediemCard />
+                <MediemCard />
+                <MediemCard />
+                <MediemCard />
+                <MediemCard />
               </Box>
             </div>
           </Paper>

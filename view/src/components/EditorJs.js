@@ -1,10 +1,4 @@
-import {
-  default as React,
-  useEffect,
-  useRef,
-  useState,
-  useContext,
-} from 'react';
+import { default as React, useEffect, useRef, useContext } from 'react';
 import EditorJS from '@editorjs/editorjs';
 import Header from '@editorjs/header';
 import List from '@editorjs/list';

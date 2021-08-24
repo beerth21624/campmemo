@@ -5,9 +5,11 @@ exports.createPost = async (req, res, next) => {
   try {
     const newPost = await Post.create({
       title: req.body.title,
-      data: req.body.data,
+      desc: req.body.desc,
       photo: req.body.photo,
       userId: req.body.id,
+      category: req.body.category,
+      author: req.body.author,
     });
     res.status(201).json(newPost);
   } catch (err) {
@@ -19,13 +21,13 @@ exports.createPost = async (req, res, next) => {
 exports.getPost = async (req, res, next) => {
   try {
     const post = await Post.findById(req.params.id);
-    res.status(200).json(post.data[0]);
+    res.status(200).json(post);
   } catch (err) {
     res.status(500).json(err);
   }
 };
 
-//get all post
+// get all post
 exports.getAllPost = async (req, res, next) => {
   try {
     const posts = await Post.find();
@@ -38,7 +40,8 @@ exports.getAllPost = async (req, res, next) => {
 //get new post(5)
 exports.getNewPost = async (req, res, next) => {
   try {
-    const Posts = await Post.find().sort({ createdAt: -1 }).limit(5);
+    const Posts = await Post.find();
+    console.log(Posts);
     res.status(200).json(Posts);
   } catch (err) {
     res.status(500).json(err);

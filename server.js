@@ -4,6 +4,8 @@ const app = express();
 const mongoose = require('mongoose');
 const postRoute = require('./routers/post');
 const authRoute = require('./routers/auth');
+const privateRoute = require('./routers/private');
+const categoryRoute = require('./routers/category');
 dotenv.config();
 app.use(express.json());
 
@@ -19,6 +21,8 @@ mongoose
 
 app.use('/api/auth/', authRoute);
 app.use('/api/post/', postRoute);
+app.use('/api/private/', privateRoute);
+app.use('/api/category/', categoryRoute);
 
 app.listen(5000, () => {
   console.log('backend start');

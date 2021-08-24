@@ -1,19 +1,20 @@
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 exports.validateToken = async (req, res, next) => {
+  console.log(req.headers);
   let token;
 
   if (
     req.headers.authorization &&
     req.headers.authorization.startsWith('Bearer')
   ) {
-    token = req.headers.authorization.split('')[1];
+    token = req.headers.authorization.split(' ')[1];
   }
 
   if (!token) {
     res
       .status(401)
-      .json({ success: false, error: 'Not authorized to accez this riute' });
+      .json({ success: false, error: 'Not authorized to access this route' });
   }
 
   try {

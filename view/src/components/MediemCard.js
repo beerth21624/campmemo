@@ -8,6 +8,7 @@ import { Typography } from '@material-ui/core';
 import { Card } from '@material-ui/core';
 import { CardActionArea } from '@material-ui/core';
 import { Link } from 'react-router-dom';
+import { Box } from '@material-ui/core';
 const theme = createTheme({
   palette: {
     primary: {
@@ -45,10 +46,27 @@ const useStyles = makeStyles((theme) => ({
     lineHeight: 1,
     color: '#191a1f',
     marginBottom: '0.5rem',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    wordBreak: 'break-all',
+    display: '-webkit-box',
+    '-webkit-line-clamp': 1,
+    '-webkit-box-orient': 'vertical',
+  },
+  desc: {
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    wordBreak: 'break-all',
+    display: '-webkit-box',
+    '-webkit-line-clamp': 4,
+    '-webkit-box-orient': 'vertical',
+  },
+  author: {
+    marginLeft: '10px',
   },
 }));
 
-const ProfilePost = () => {
+const MediemCard = ({ post }) => {
   const classes = useStyles();
 
   return (
@@ -63,17 +81,20 @@ const ProfilePost = () => {
             />
             <div className={classes.textContainer}>
               <Typography variant="h4" className={classes.text}>
-                Lorem Ipsum is simply dummy text
+                {post.title}
               </Typography>
-              <Typography>
-                industry. Lorem Ipsum has been the industry's standard dummy
-                text ever since the 1500s, when an unknown printer took a galley
-                of type and scrambled it to make a type specimen book. It has
-                survived not only five centuries,{' '}
-              </Typography>
-              <Typography variant="caption" color="textSecondary">
-                11 Nov 200
-              </Typography>
+              <Typography className={classes.desc}>{post.desc}</Typography>
+              <Box
+                display="flex"
+                flexDirection="row"
+                marginTop="5px"
+                color="gray"
+              >
+                <Typography variant="caption">11 Nov 2000</Typography>
+                <Typography variant="caption" className={classes.author}>
+                  By beerdosan
+                </Typography>
+              </Box>
             </div>
           </CardActionArea>
         </Link>
@@ -81,4 +102,4 @@ const ProfilePost = () => {
     </ThemeProvider>
   );
 };
-export default ProfilePost;
+export default MediemCard;

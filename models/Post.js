@@ -7,8 +7,9 @@ const PostSchema = new mongoose.Schema(
       require: true,
       unique: true,
     },
-    data: {
-      type: Array,
+    desc: {
+      type: String,
+      require: true,
     },
     photo: {
       type: String,
@@ -18,8 +19,15 @@ const PostSchema = new mongoose.Schema(
       type: String,
       require: true,
     },
+    category: {
+      type: String,
+      default: 'camping',
+    },
+    author: {
+      type: String,
+    },
   },
   { timestamps: true }
 );
 
-module.exports = mongoose.model('CreatePost', PostSchema);
+module.exports = mongoose.model('Post', PostSchema);

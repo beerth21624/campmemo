@@ -11,6 +11,7 @@ import MainPostSingle from '../components/singlepost/MainPostSingle';
 import Footer from '../components/footer/Footer';
 import Author from '../components/singlepost/Author';
 import axios from 'axios';
+import { useLocation } from 'react-router-dom';
 
 const theme = createTheme({
   palette: {
@@ -30,28 +31,29 @@ const useStyles = makeStyles((theme) => ({
 
 const Post = () => {
   const classes = useStyles();
-  const [singlePost, setSinglePost] = useState(null);
+  const [Post, setPost] = useState({});
+
+  const location = useLocation();
+  const path = location.pathname.split('/')[2];
 
   useEffect(() => {
     const fetchPost = async () => {
       try {
-        const res = await axios.get('/post/61209b1b729b867bfcff2ad4');
-        setSinglePost(res);
+        const res = await axios.get('/post/' + path);
+        setPost(res.data);
       } catch (err) {}
     };
     fetchPost();
   }, []);
 
-  const data = JSON.parse(singlePost);
-  console.log(data);
-
+  console.log(Post);
   return (
     <ThemeProvider theme={theme}>
       <div style={{ backgroundColor: '#f3f3f3', paddingBottom: '40px' }}>
-        <Container maxWidth="xl" className={classes.root}>
+        <Container maxWidth="lg" className={classes.root}>
           <Grid container md={12} direction="row">
             <Author />
-            <MainPostSingle post={singlePost} />
+            <MainPostSingle post={Post} />
             <PostSidebar />
           </Grid>
         </Container>

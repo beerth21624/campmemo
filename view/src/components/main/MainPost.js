@@ -29,6 +29,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: '#F3F3F3',
     boxShadow: 'none',
+    maxHeight: '64vh',
   },
   media: {
     height: '40vh',
@@ -40,6 +41,7 @@ const useStyles = makeStyles((theme) => ({
   carditem: {
     position: 'absolute',
     backgroundColor: 'tomato',
+    borderRadius: '5px',
     color: 'white',
     padding: '3px',
     top: 260,
@@ -49,20 +51,37 @@ const useStyles = makeStyles((theme) => ({
   boxitem: {
     margin: '15px 5px',
   },
+  cardcontent: {
+    minHeight: '100px',
+  },
+  title: {
+    width: '100%',
+    overflow: 'hidden',
+    textOverflow: 'hidden',
+    wordBreak: 'break-all',
+    display: '-webkit-box',
+    '-webkit-line-clamp': 2,
+    '-webkit-box-orient': 'vertical',
+  },
+  desc: {
+    width: '100%',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    wordBreak: 'break-all',
+    display: '-webkit-box',
+    '-webkit-line-clamp': 3,
+    '-webkit-box-orient': 'vertical',
+  },
 }));
 
 const MainPost = ({ post }) => {
   const classes = useStyles();
 
-  // useEffect(() => {
-  //   ConvertPost(post);
-  // }, []);
-
   return (
     <ThemeProvider theme={theme}>
       <Grid item md={6} style={{ padding: '10px' }}>
         <Card className={classes.root} square>
-          <Link to={`/post/123456`} className="link">
+          <Link to={`/post/${post._id}`} className="link">
             <CardActionArea>
               <div className={classes.card}>
                 <CardMedia
@@ -71,17 +90,25 @@ const MainPost = ({ post }) => {
                   title="camp"
                 />
                 <Typography variant="caption" className={classes.carditem}>
-                  camping
+                  {post.category}
                 </Typography>
               </div>
-              <CardContent>
-                <Typography gutterBottom variant="h6" component="h2">
-                  Lorem Ipsum is simply dummy text of the printing and
-                  typesetting
+              <CardContent className={classes.cardcontent}>
+                <Typography
+                  gutterBottom
+                  variant="h6"
+                  component="h2"
+                  className={classes.title}
+                >
+                  {post.title}
                 </Typography>
-                <Typography variant="body2" color="textSecondary" component="p">
-                  Lizards are a widespread group of squamate reptiles, with over
-                  6,000 species, ranging across all continents except Antarctica
+                <Typography
+                  variant="body2"
+                  color="textSecondary"
+                  component="p"
+                  className={classes.desc}
+                >
+                  {post.desc}
                 </Typography>
               </CardContent>
 
