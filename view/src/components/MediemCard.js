@@ -74,11 +74,7 @@ const MediemCard = ({ post }) => {
       <Card className={classes.root}>
         <Link to={`/post/123456`} className="link">
           <CardActionArea className={classes.card}>
-            <img
-              className={classes.img}
-              src="https://images.unsplash.com/photo-1529385101576-4e03aae38ffc?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTV8fGNhbXBpbmd8ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60"
-              alt=""
-            />
+            <img className={classes.img} src={post.photo} alt="" />
             <div className={classes.textContainer}>
               <Typography variant="h4" className={classes.text}>
                 {post.title}

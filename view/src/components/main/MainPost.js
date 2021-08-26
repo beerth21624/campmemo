@@ -86,7 +86,7 @@ const MainPost = ({ post }) => {
               <div className={classes.card}>
                 <CardMedia
                   className={classes.media}
-                  image="https://images.unsplash.com/photo-1522041350204-22285237eeca?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjAxfHxjYW1waW5nfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60"
+                  image={post.photo}
                   title="camp"
                 />
                 <Typography variant="caption" className={classes.carditem}>

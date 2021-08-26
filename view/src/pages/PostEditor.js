@@ -17,6 +17,8 @@ import { FormControl } from '@material-ui/core';
 import { Select } from '@material-ui/core';
 import { InputLabel } from '@material-ui/core';
 import { GetUserContextService } from '../context/getUserContext/GetUserContextService';
+import { storage } from '../components/firebase';
+import { set } from 'lodash';
 
 const theme = createTheme({
   palette: {
@@ -42,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
   previewImg: {
     width: '80px',
     height: '80px',
-    display: 'none',
+    // display: 'none',
     marginLeft: '10px',
     overflow: 'hidden',
     objectFit: 'cover',
@@ -68,6 +70,11 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: '#FF7F50',
     color: 'white',
   },
+  saveButtonNoImg: {
+    marginTop: '17px',
+    backgroundColor: '#FFCEAE',
+    color: 'white',
+  },
   textarea: {
     border: 'none',
     width: '50vw',
@@ -82,11 +89,15 @@ const useStyles = makeStyles((theme) => ({
 
 function PostEditor() {
   const classes = useStyles();
-  // const { saveContent } = useContext(PostContextSave);
   const { user } = useContext(AuthContext);
-  const title = useRef('');
+  // const title = useRef('');
+  const [title, setTitle] = useState('');
   const desc = useRef('');
-  const filePic = useRef('');
+
+  const [filePic, setFilePic] = useState('');
+  const [previewImg, setPreviewImg] = useState('');
+  const [alertNoImg, setAlertNoImg] = useState(false);
+  const [alertNoTitle, setAlertNoTitle] = useState(false);
 
   const [category, setCategory] = useState('');
   const [userData, setuserData] = useState({});
@@ -98,28 +109,77 @@ function PostEditor() {
     };
     callUser();
   }, []);
-  console.log(userData);
+
+  useEffect(() => {
+    if (title) {
+      setAlertNoTitle(false);
+    }
+  }, [title]);
   const handleSave = async (e) => {
-    // const saveEditor = await saveContent.save();
     e.preventDefault();
     try {
       const createPost = await axios.post('post', {
-        title: title.current.value,
+        title: title,
         desc: desc.current.value,
-        photo:
-          'https://images.unsplash.com/photo-1496545672447-f699b503d270?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTB8fGNhbXBpbmd8ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
+        photo: filePic,
         userId: '611e33b8902b51ea97af1089',
         category: category,
         author: userData.username,
       });
       console.log(createPost);
       createPost && window.location.replace('/');
+      console.log(createPost);
     } catch (err) {
       console.log(err);
     }
   };
   const handleChange = (e) => {
     setCategory(e.target.value);
+  };
+  const handleFilePic = (e) => {
+    const filePic = e.target.files[0];
+    if (filePic) {
+      // setFilePic(e.target.files[0]);
+      const reader = new FileReader();
+      reader.readAsDataURL(filePic);
+      reader.onloadend = () => {
+        setPreviewImg(reader.result);
+      };
+
+      Upload(filePic);
+      setAlertNoImg(false);
+    }
+  };
+
+  const Upload = (filePic) => {
+    const uploadTask = storage.ref(`images/${filePic.name}`).put(filePic);
+    uploadTask.on(
+      'state_changed',
+      (snapshot) => {},
+      (error) => {
+        console.log(error);
+      },
+      () => {
+        storage
+          .ref('images')
+          .child(filePic.name)
+          .getDownloadURL()
+          .then((url) => {
+            console.log(url);
+            // return url;
+            setFilePic(url);
+          });
+      }
+    );
+  };
+
+  const handleSaveNoImg = () => {
+    if (!filePic) {
+      setAlertNoImg(true);
+    }
+    if (!title) {
+      setAlertNoTitle(true);
+    }
   };
 
   return (
@@ -148,27 +208,29 @@ function PostEditor() {
                     multiple
                     type="file"
                     className={classes.input}
-                    // onChange={(e) => setFilePic(e.target.value)}
-                    ref={filePic}
+                    onChange={handleFilePic}
                   />
                   <label htmlFor="contained-button-file">
                     <Button variant="outlined" color="primary" component="span">
                       Add a cover image
                     </Button>
                   </label>
-                  <img
-                    className={classes.previewImg}
-                    src="https://images.unsplash.com/photo-1486915309851-b0cc1f8a0084?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8Y2FtcGluZ3xlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
-                    alt=""
-                  />
+
+                  {previewImg && (
+                    <img
+                      className={classes.previewImg}
+                      src={previewImg}
+                      alt=""
+                    />
+                  )}
                 </div>
                 <form className={classes.root} noValidate autoComplete="off">
                   <TextareaAutosize
                     className={classes.postTitles}
                     aria-label="empty textarea"
                     placeholder="New post title here..."
-                    // onChange={(e) => setTitle(e.target.value)}
-                    ref={title}
+                    // ref={title}
+                    onChange={(e) => setTitle(e.target.value)}
                   />
 
                   {/* <Editor /> */}
@@ -178,7 +240,6 @@ function PostEditor() {
                     minRows={19}
                     placeholder="Tell your story"
                     className={classes.textarea}
-                    // onChange={(e) => setDesc(e.target.value)}
                     ref={desc}
                   />
                 </form>
@@ -199,15 +260,36 @@ function PostEditor() {
                     <option value="fishing">fishing</option>
                   </Select>
                 </FormControl>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  startIcon={<CloudUploadIcon />}
-                  className={classes.saveButton}
-                  onClick={handleSave}
-                >
-                  publish
-                </Button>
+                {filePic && title ? (
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    startIcon={<CloudUploadIcon />}
+                    className={classes.saveButton}
+                    onClick={handleSave}
+                  >
+                    publish
+                  </Button>
+                ) : (
+                  <Button
+                    variant="contained"
+                    startIcon={<CloudUploadIcon />}
+                    className={classes.saveButtonNoImg}
+                    onClick={handleSaveNoImg}
+                  >
+                    publish
+                  </Button>
+                )}
+                {alertNoImg && (
+                  <Typography style={{ color: 'red', marginTop: 10 }}>
+                    please add a cover image!
+                  </Typography>
+                )}
+                {alertNoTitle && (
+                  <Typography style={{ color: 'red', marginTop: 10 }}>
+                    please enter title!
+                  </Typography>
+                )}
               </Box>
             </Box>
           </Grid>

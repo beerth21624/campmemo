@@ -11,7 +11,7 @@ const {
 
 router.route('/').post(createPost).get(getAllPost);
 router.route('/:id').get(getPost);
-router.route('/postst').get(getNewPost);
+router.route('/posts').get(getNewPost);
 router.route('/header').get(getHeaderPost);
 router.route('/profile/:id').get(getProfilePost);
 
