@@ -72,7 +72,7 @@ const CategoryCard = ({ post }) => {
   return (
     <ThemeProvider theme={theme}>
       <Card className={classes.root}>
-        <Link to={`/post/123456`} className="link">
+        <Link to={'/post/' + post._id} className="link">
           <CardActionArea className={classes.card}>
             <img className={classes.img} src={post.photo} alt="" />
             <div className={classes.textContainer}>

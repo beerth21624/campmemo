@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   createTheme,
   makeStyles,
@@ -10,7 +10,7 @@ import { Typography } from '@material-ui/core';
 import AssistantIcon from '@material-ui/icons/Assistant';
 import Pagination from '@material-ui/lab/Pagination';
 import { Box } from '@material-ui/core';
-
+import axios from 'axios';
 const theme = createTheme({
   palette: {
     primary: {
@@ -27,10 +27,26 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Main = ({ posts }) => {
+const Main = () => {
   const classes = useStyles();
-  console.log(posts);
 
+  const [posts, setPosts] = useState([]);
+  const [page, setPage] = useState(1);
+  const [pageCount, setPageCount] = useState('');
+
+  useEffect(() => {
+    const fetchPost = async () => {
+      const res = await axios.get('/post?page=' + page);
+      console.log(res);
+      setPosts(res.data.data);
+      setPageCount(res.data.pages);
+    };
+    fetchPost();
+  }, [page]);
+
+  const handleChange = (e, value) => {
+    setPage(value);
+  };
   return (
     <ThemeProvider theme={theme}>
       <Grid item container md={9} className={classes.root}>
@@ -45,7 +61,11 @@ const Main = ({ posts }) => {
         ))}
         <Box display="flex" width="100%" marginTop="50px">
           <div style={{ margin: 'auto' }}>
-            <Pagination count={10} color="primary" />
+            <Pagination
+              count={pageCount}
+              color="primary"
+              onChange={handleChange}
+            />
           </div>
         </Box>
       </Grid>

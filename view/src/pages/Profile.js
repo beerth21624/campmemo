@@ -16,6 +16,7 @@ import { AuthContext } from '../context/authContext/AuthContext';
 import { useLocation } from 'react-router-dom';
 import { GetUserContextService } from '../context/getAuthorContext /GetAuthorContextService';
 import { Button } from '@material-ui/core';
+import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 
 const theme = createTheme({
   palette: {
@@ -65,6 +66,9 @@ const useStyles = makeStyles((theme) => ({
   desc: {
     padding: '0 20vh',
   },
+  btnload: {
+    margin: '40px 0',
+  },
 }));
 
 const Profile = () => {
@@ -75,6 +79,7 @@ const Profile = () => {
   const [myUser, setMyUser] = useState(false);
   const [profileData, setProfileData] = useState('');
   const [Post, setPost] = useState([]);
+  const [limit, setLimit] = useState(6);
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -86,11 +91,20 @@ const Profile = () => {
       }
       const userdata = await axios.get('/user/userprofile/' + UserInput);
       setProfileData(userdata.data);
-      const posts = await axios.get('/post/profile/' + UserInput);
+      const posts = await axios.get(
+        '/post/profile/' + UserInput + '?limit=' + limit
+      );
       setPost(posts.data);
     };
     fetchUser();
-  }, []);
+  }, [limit]);
+
+  const handleLimit = () => {
+    const newLimit = limit + 5;
+    setLimit(newLimit);
+    console.log(newLimit);
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <div className={classes.root}>
@@ -135,6 +149,16 @@ const Profile = () => {
                   <ProfileCard key={post._id} post={post} />
                 ))}
               </Box>
+              {Post && (
+                <Button
+                  className={classes.btnload}
+                  color="primary"
+                  onClick={handleLimit}
+                >
+                  Load more post
+                  <KeyboardArrowDownIcon />
+                </Button>
+              )}
             </div>
           </Paper>
         </Container>

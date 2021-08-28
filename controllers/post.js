@@ -30,9 +30,21 @@ exports.getPost = async (req, res, next) => {
 
 // get all post
 exports.getAllPost = async (req, res, next) => {
+  const pageSize = 10;
+  const page = parseInt(req.query.page) || 1;
+  const skip = (page - 1) * pageSize;
   try {
-    const posts = await Post.find();
-    res.status(200).json(posts);
+    const total = await Post.countDocuments();
+    const pages = Math.ceil(total / pageSize);
+
+    const results = await Post.find().skip(skip).limit(pageSize);
+    res.status(200).json({
+      status: 'success',
+      count: results.length,
+      page,
+      pages,
+      data: results,
+    });
   } catch (err) {
     res.status(500).json(err);
   }
@@ -67,13 +79,9 @@ exports.getHeaderPost = async (req, res, next) => {
 
 //get profile post
 exports.getProfilePost = async (req, res, next) => {
-  console.log(req.params.id);
+  const limits = parseInt(req.query.limit);
   try {
-    const post = await Post.aggregate([
-      {
-        $match: { userId: req.params.id },
-      },
-    ]);
+    const post = await Post.find({ userId: req.params.id }).limit(limits);
 
     res.status(200).json(post);
   } catch (err) {

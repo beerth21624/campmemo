@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'flex-start',
   },
   img: {
-    width: '180px',
+    width: '200px',
     height: '180px',
     borderRadius: '40px',
   },

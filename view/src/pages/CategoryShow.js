@@ -16,6 +16,7 @@ import Category from '../components/sidebar/Category';
 import NewPost from '../components/sidebar/NewPost';
 import { Link, useLocation } from 'react-router-dom';
 import axios from 'axios';
+import Pagination from '@material-ui/lab/Pagination';
 
 const theme = createTheme({
   palette: {
@@ -67,13 +68,21 @@ const CategoryShow = () => {
   const path = location.pathname.split('/')[2];
   const [cat, setCat] = useState([]);
 
+  const [page, setPage] = useState(1);
+  const [pageCount, setPageCount] = useState('');
+
   useEffect(() => {
     const fetchCat = async () => {
-      const cats = await axios.get('/category/' + path);
-      setCat(cats.data);
+      const cats = await axios.get('/category/' + path + '?page=' + page);
+      setCat(cats.data.data);
+      setPageCount(cats.data.pages);
     };
     fetchCat();
-  }, [path]);
+  }, [path, page]);
+
+  const handleChange = (e, value) => {
+    setPage(value);
+  };
 
   return (
     <ThemeProvider theme={theme}>
@@ -126,6 +135,15 @@ const CategoryShow = () => {
               {cat.map((post) => (
                 <CategoryCard post={post} />
               ))}
+              <Box display="flex" width="100%" margin="50px 0 70px 0">
+                <div style={{ margin: 'auto' }}>
+                  <Pagination
+                    count={pageCount}
+                    color="primary"
+                    onChange={handleChange}
+                  />
+                </div>
+              </Box>
             </Grid>
             <Grid item md={3}>
               <Category />

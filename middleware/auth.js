@@ -1,7 +1,6 @@
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 exports.validateToken = async (req, res, next) => {
-  console.log(req.headers);
   let token;
 
   if (
