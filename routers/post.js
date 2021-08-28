@@ -10,9 +10,9 @@ const {
 } = require('../controllers/post');
 
 router.route('/').post(createPost).get(getAllPost);
-router.route('/:id').get(getPost);
-router.route('/posts').get(getNewPost);
+router.route('/new').get(getNewPost);
 router.route('/header').get(getHeaderPost);
+router.route('/:id').get(getPost);
 router.route('/profile/:id').get(getProfilePost);
 
 module.exports = router;

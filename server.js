@@ -6,12 +6,10 @@ const postRoute = require('./routers/post');
 const authRoute = require('./routers/auth');
 const privateRoute = require('./routers/private');
 const categoryRoute = require('./routers/category');
+const userRoute = require('./routers/user');
 
-// const { Upload } = require('./untils/Cloudinary');
-const { cloudinary } = require('./untils/Cloudinary');
 dotenv.config();
 app.use(express.json());
-app.use(express.urlencoded({ limit: '50mb', extended: true }));
 
 mongoose
   .connect(process.env.MONGO_URL, {
@@ -21,25 +19,16 @@ mongoose
     useFindAndModify: true,
   })
   .then(console.log('connected to mongodb'))
-  .catch((err) => console.log(err));
+  .catch((err) => {
+    console.log(err);
+    process.exit(1);
+  });
 
 app.use('/api/auth/', authRoute);
 app.use('/api/post/', postRoute);
 app.use('/api/private/', privateRoute);
 app.use('/api/category/', categoryRoute);
-app.post('/api/upload', async (req, res) => {
-  const fileStr = req.body.file;
-  try {
-    const uploadResponse = await cloudinary.uploader.upload(fileStr, {
-      upload_preset: 'camp_memo',
-    });
-    console.log(uploadResponse);
-    res.json({ msg: 'yaya' });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ err: 'Something went wrong' });
-  }
-});
+app.use('/api/user', userRoute);
 
 app.listen(5000, () => {
   console.log('backend start');

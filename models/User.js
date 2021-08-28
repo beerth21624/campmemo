@@ -30,7 +30,8 @@ const UserSchema = new mongoose.Schema(
     },
     profilePic: {
       type: String,
-      default: '',
+      default:
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLudNg5O7N1-IL_vX3c9i5hoY-gwNojCAXfkcWkKb5a9RsEzkRqKji4P0GN5NS0VJH85M&usqp=CAU',
     },
     isAdmin: {
       type: Boolean,

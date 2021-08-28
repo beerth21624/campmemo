@@ -13,7 +13,6 @@ const PostSchema = new mongoose.Schema(
     },
     photo: {
       type: String,
-      require: false,
     },
     userId: {
       type: String,
@@ -21,9 +20,11 @@ const PostSchema = new mongoose.Schema(
     },
     category: {
       type: String,
-      default: 'camping',
     },
     author: {
+      type: String,
+    },
+    authorPic: {
       type: String,
     },
   },

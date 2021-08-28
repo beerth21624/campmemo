@@ -1,4 +1,5 @@
 const Post = require('../models/Post');
+
 //create post
 exports.createPost = async (req, res, next) => {
   try {
@@ -6,9 +7,10 @@ exports.createPost = async (req, res, next) => {
       title: req.body.title,
       desc: req.body.desc,
       photo: req.body.photo,
-      userId: req.body.id,
+      userId: req.body.userId,
       category: req.body.category,
       author: req.body.author,
+      authorPic: req.body.authorPic,
     });
     res.status(201).json(newPost);
   } catch (err) {
@@ -39,8 +41,8 @@ exports.getAllPost = async (req, res, next) => {
 //get new post(5)
 exports.getNewPost = async (req, res, next) => {
   try {
-    const Posts = await Post.find();
-    console.log(Posts);
+    const Posts = await Post.find().sort({ createdAt: -1 }).limit(5);
+
     res.status(200).json(Posts);
   } catch (err) {
     res.status(500).json(err);
@@ -65,6 +67,7 @@ exports.getHeaderPost = async (req, res, next) => {
 
 //get profile post
 exports.getProfilePost = async (req, res, next) => {
+  console.log(req.params.id);
   try {
     const post = await Post.aggregate([
       {
