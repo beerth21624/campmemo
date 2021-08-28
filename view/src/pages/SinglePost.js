@@ -46,13 +46,12 @@ const Post = () => {
     fetchPost();
   }, []);
 
-  console.log(Post);
   return (
     <ThemeProvider theme={theme}>
       <div style={{ backgroundColor: '#f3f3f3', paddingBottom: '40px' }}>
         <Container maxWidth="lg" className={classes.root}>
           <Grid container md={12} direction="row">
-            <Author />
+            <Author author={Post.author} />
             <MainPostSingle post={Post} />
             <PostSidebar />
           </Grid>

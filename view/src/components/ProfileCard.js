@@ -8,6 +8,7 @@ import { Typography } from '@material-ui/core';
 import { Card } from '@material-ui/core';
 import { CardActionArea } from '@material-ui/core';
 import { Link } from 'react-router-dom';
+import { Box } from '@material-ui/core';
 const theme = createTheme({
   palette: {
     primary: {
@@ -21,8 +22,8 @@ const theme = createTheme({
 const useStyles = makeStyles((theme) => ({
   root: {
     marginBottom: '7px',
-    backgroundColor: '#F3F3F3',
-    borderRadius: 'none',
+    backgroundColor: 'inherit',
+    borderRadius: '10px',
     boxShadow: 'none',
   },
   card: {
@@ -32,16 +33,16 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'flex-start',
   },
   img: {
-    width: '70px',
-    height: '53px',
-    borderRadius: '4px',
+    width: '180px',
+    height: '180px',
+    borderRadius: '40px',
   },
   textContainer: {
     marginLeft: '6px',
   },
   text: {
-    fontSize: '0.9375rem',
-    fontWeight: 500,
+    fontSize: '1.3rem',
+    fontWeight: 700,
     lineHeight: 1,
     color: '#191a1f',
     marginBottom: '0.5rem',
@@ -49,27 +50,49 @@ const useStyles = makeStyles((theme) => ({
     textOverflow: 'ellipsis',
     wordBreak: 'break-all',
     display: '-webkit-box',
-    '-webkit-line-clamp': 2,
+    '-webkit-line-clamp': 1,
     '-webkit-box-orient': 'vertical',
+  },
+  desc: {
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    wordBreak: 'break-all',
+    display: '-webkit-box',
+    '-webkit-line-clamp': 4,
+    '-webkit-box-orient': 'vertical',
+  },
+  author: {
+    marginLeft: '10px',
   },
 }));
 
-const NewPostCard = ({ post }) => {
+const ProfileCard = ({ post }) => {
   const classes = useStyles();
 
   return (
     <ThemeProvider theme={theme}>
       <Card className={classes.root}>
-        <Link to={`/post/123456`} className="link">
+        <Link to={'/post/' + post._id} className="link">
           <CardActionArea className={classes.card}>
             <img className={classes.img} src={post.photo} alt="" />
             <div className={classes.textContainer}>
-              <Typography variant="h6" className={classes.text}>
+              <Typography variant="h4" className={classes.text}>
                 {post.title}
               </Typography>
-              <Typography variant="caption" color="textSecondary">
-                {new Date(post.createdAt).toDateString()}
-              </Typography>
+              <Typography className={classes.desc}>{post.desc}</Typography>
+              <Box
+                display="flex"
+                flexDirection="row"
+                marginTop="5px"
+                color="gray"
+              >
+                <Typography variant="caption">
+                  {new Date(post.createdAt).toDateString()}
+                </Typography>
+                <Typography variant="caption" className={classes.author}>
+                  By <span>{post.author}</span>
+                </Typography>
+              </Box>
             </div>
           </CardActionArea>
         </Link>
@@ -77,4 +100,4 @@ const NewPostCard = ({ post }) => {
     </ThemeProvider>
   );
 };
-export default NewPostCard;
+export default ProfileCard;

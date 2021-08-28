@@ -5,14 +5,16 @@ import NewPostCard from './NewPostCard';
 import axios from 'axios';
 
 const NewPost = () => {
-  const [post, setPost] = useState({});
+  const [post, setPost] = useState([]);
   useEffect(() => {
     const fetchPost = async () => {
       const postData = await axios.get('/post/new');
-      console.log(postData);
+      setPost(postData.data);
     };
     fetchPost();
   }, []);
+
+  console.log(post);
   return (
     <Box
       display="flex"
@@ -23,11 +25,9 @@ const NewPost = () => {
       <Typography variant="h5" gutterBottom>
         <b>Recent post</b>
       </Typography>
-      <NewPostCard />
-      <NewPostCard />
-      <NewPostCard />
-      <NewPostCard />
-      <NewPostCard />
+      {post.map((post) => (
+        <NewPostCard key={post._id} post={post} />
+      ))}
     </Box>
   );
 };

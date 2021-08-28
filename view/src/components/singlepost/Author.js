@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   createTheme,
   makeStyles,
@@ -10,7 +10,9 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+
 import { Link } from 'react-router-dom';
+const axios = require('axios');
 
 const theme = createTheme({
   palette: {
@@ -45,35 +47,47 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Author = () => {
+const Author = ({ author }) => {
   const classes = useStyles();
+  const [Author, setAuthor] = useState('');
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      const user = await axios.get('/user/author/' + author);
+      setAuthor(user.data);
+    };
+    fetchUser();
+  }, [author]);
 
   return (
     <ThemeProvider theme={theme}>
       <Grid item md={2} style={{ paddingRight: '20px' }}>
-        <Card className={classes.root}>
-          <CardMedia
-            className={classes.media}
-            image="https://images.unsplash.com/photo-1581456495146-65a71b2c8e52?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTd8fHBlcnNvbnxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60"
-            title=""
-            style={{ borderRadius: '50%' }}
-          />
-          <CardContent>
-            <Typography gutterBottom variant="h5" component="h2">
-              Beerdosan
-            </Typography>
-            <Typography variant="body2" color="textSecondary" component="p">
-              Lizards are a widespread group of squamate reptiles, with over
-              6,000 species, ranging across all continents except Antarctica
-            </Typography>
-          </CardContent>
+        {Author && (
+          <>
+            <Card className={classes.root}>
+              <CardMedia
+                className={classes.media}
+                image="https://images.unsplash.com/photo-1581456495146-65a71b2c8e52?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTd8fHBlcnNvbnxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60"
+                title=""
+                style={{ borderRadius: '50%' }}
+              />
+              <CardContent>
+                <Typography gutterBottom variant="h5" component="h2">
+                  {Author.username}
+                </Typography>
+                <Typography variant="body2" color="textSecondary" component="p">
+                  {Author.desc}
+                </Typography>
+              </CardContent>
 
-          <Link to={`/profile/123456`} className="link">
-            <Button size="small" color="Default">
-              view profile
-            </Button>
-          </Link>
-        </Card>
+              <Link to={'/profile/' + Author._id} className="link">
+                <Button size="small" color="Default">
+                  view profile
+                </Button>
+              </Link>
+            </Card>
+          </>
+        )}
       </Grid>
     </ThemeProvider>
   );

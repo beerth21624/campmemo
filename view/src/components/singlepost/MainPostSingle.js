@@ -61,11 +61,7 @@ const MainPostSingle = ({ post }) => {
       <Grid item container md={7} className={classes.root}>
         <Paper width="30vh" className={classes.paper}>
           <strong className={classes.title}>{post.title}</strong>
-          <img
-            className={classes.coverPic}
-            src="https://images.unsplash.com/photo-1537225228614-56cc3556d7ed?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTJ8fGNhbXBpbmd8ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60"
-            alt=""
-          />
+          <img className={classes.coverPic} src={post.photo} alt="" />
           <p className={classes.desc}>{post.desc}</p>
         </Paper>
         <Paper width="30vh" className={classes.comment}>

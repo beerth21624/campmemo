@@ -10,7 +10,7 @@ import { Grid } from '@material-ui/core';
 import { Typography } from '@material-ui/core';
 import AssignmentIcon from '@material-ui/icons/Assignment';
 import { Box } from '@material-ui/core';
-import CategoryCard from '../components/MediemCard';
+import CategoryCard from '../components/CategoryCard';
 import Footer from '../components/footer/Footer';
 import Category from '../components/sidebar/Category';
 import NewPost from '../components/sidebar/NewPost';

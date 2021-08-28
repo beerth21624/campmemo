@@ -47,29 +47,38 @@ const useStyles = makeStyles((theme) => ({
     zIndex: 10,
     color: 'white',
     [theme.breakpoints.only('xs')]: {
-      paddingTop: '4rem',
+      paddingTop: '5rem',
     },
     [theme.breakpoints.only('sm')]: {
-      paddingTop: '6rem',
-    },
-    [theme.breakpoints.only('md')]: {
       paddingTop: '8rem',
     },
-    [theme.breakpoints.up('lg')]: {
+    [theme.breakpoints.only('md')]: {
+      paddingTop: '11rem',
+    },
+    [theme.breakpoints.only('lg')]: {
       paddingTop: '10rem',
     },
-    //   overflow:'auto',
-    // wordBreak: 'break-all',
-    // textOverflow: 'ellipsis',
+    [theme.breakpoints.only('xl')]: {
+      paddingTop: '11rem',
+    },
   },
-  title: {},
+  title: {
+    width: '50%',
+    overflow: 'hidden',
+    textOverflow: 'hidden',
+    wordBreak: 'break-all',
+    lineHeight: 1.4,
+    display: '-webkit-box',
+    '-webkit-line-clamp': 2,
+    '-webkit-box-orient': 'vertical',
+  },
   author: {
     display: 'flex',
     justifyContent: 'row',
   },
 }));
 
-export default function ItemFeature() {
+export default function ItemFeature({ post }) {
   const classes = useStyles();
 
   return (
@@ -77,25 +86,26 @@ export default function ItemFeature() {
       <Grid item>
         <Card className={classes.paper}>
           <CardActionArea>
-            <CardMedia
-              className={classes.media}
-              image="https://images.unsplash.com/photo-1523987355523-c7b5b0dd90a7?ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8Y2FtcGluZ3xlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60"
-            />
+            <CardMedia className={classes.media} image={post.photo} />
             <CardContent className={classes.content}>
               <Box display="flex" flexDirection="column">
-                <div className={classes.title}>
+                <div>
                   <Typography
                     variant="caption"
                     style={{ backgroundColor: 'tomato', padding: '3px' }}
                   >
-                    camping
+                    {post.category}
                   </Typography>
-                  <Typography variant="h5">Lorem Ipsum</Typography>
+                  <Typography className={classes.title} variant="h6">
+                    {post.title}
+                  </Typography>
                 </div>
                 <div className={classes.author}>
-                  <Typography variant="caption">By Beerdosan</Typography>
+                  <Typography variant="caption">
+                    By <span>{post.author}</span>
+                  </Typography>
                   <Typography variant="caption" style={{ marginLeft: '10px' }}>
-                    11 Nov 2021
+                    {new Date(post.createdAt).toDateString()}
                   </Typography>
                 </div>
               </Box>

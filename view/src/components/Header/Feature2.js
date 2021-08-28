@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   createTheme,
   makeStyles,
@@ -6,6 +6,7 @@ import {
 } from '@material-ui/core/styles';
 import { Grid } from '@material-ui/core';
 import ItemFeature from './ItemFeature';
+import axios from 'axios';
 
 const theme = createTheme({
   palette: {
@@ -31,12 +32,21 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Feature2() {
   const classes = useStyles();
-
+  const [Post, setPost] = useState([]);
+  useEffect(() => {
+    const fetchPost = async () => {
+      const post = await axios.get('/post/header');
+      setPost(post.data);
+    };
+    fetchPost();
+  }, []);
+  console.log(Post);
   return (
     <ThemeProvider theme={theme}>
       <Grid item container direction="column" md={6} className={classes.root}>
-        <ItemFeature />
-        <ItemFeature />
+        {Post.map((post) => (
+          <ItemFeature key={post._id} post={post} />
+        ))}
       </Grid>
     </ThemeProvider>
   );

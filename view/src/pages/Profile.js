@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import {
   createTheme,
   makeStyles,
@@ -10,7 +10,12 @@ import { Box } from '@material-ui/core';
 import { Typography } from '@material-ui/core';
 import Footer from '../components/footer/Footer';
 import EcoIcon from '@material-ui/icons/Eco';
-import MediemCard from '../components/MediemCard';
+import ProfileCard from '../components/ProfileCard';
+import axios from 'axios';
+import { AuthContext } from '../context/authContext/AuthContext';
+import { useLocation } from 'react-router-dom';
+import { GetUserContextService } from '../context/getAuthorContext /GetAuthorContextService';
+import { Button } from '@material-ui/core';
 
 const theme = createTheme({
   palette: {
@@ -53,11 +58,6 @@ const useStyles = makeStyles((theme) => ({
     border: '13px solid #191a1f',
     borderRadius: '50%',
     marginTop: '-17vh',
-    backgroundImage:
-      'url(https://images.unsplash.com/photo-1518577915332-c2a19f149a75?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjUzfHxwZW9wbGV8ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60)',
-    backgroundRepeat: 'no-repeat',
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
   },
   username: {
     marginTop: '20px',
@@ -69,7 +69,28 @@ const useStyles = makeStyles((theme) => ({
 
 const Profile = () => {
   const classes = useStyles();
+  const { user } = useContext(AuthContext);
+  const location = useLocation();
+  const UserInput = location.pathname.split('/')[2];
+  const [myUser, setMyUser] = useState(false);
+  const [profileData, setProfileData] = useState('');
+  const [Post, setPost] = useState([]);
 
+  useEffect(() => {
+    const fetchUser = async () => {
+      const currentUser = await GetUserContextService(user);
+      if (currentUser) {
+        if (UserInput === currentUser._id) {
+          setMyUser(true);
+        }
+      }
+      const userdata = await axios.get('/user/userprofile/' + UserInput);
+      setProfileData(userdata.data);
+      const posts = await axios.get('/post/profile/' + UserInput);
+      setPost(posts.data);
+    };
+    fetchUser();
+  }, []);
   return (
     <ThemeProvider theme={theme}>
       <div className={classes.root}>
@@ -77,36 +98,42 @@ const Profile = () => {
         <Container maxWidth="md" className={classes.container}>
           <Paper className={classes.paperRoot}>
             <div className={classes.profileContainer}>
-              <Box className={classes.img}></Box>
+              <img
+                className={classes.img}
+                src={profileData.profilePic}
+                alt=""
+              ></img>
+
               <Typography
                 variant="h4"
                 className={classes.username}
                 gutterBottom
               >
-                <b>Fernfernnn</b>
+                <b>{profileData.username}</b>
               </Typography>
               <Typography className={classes.desc} paragraph>
-                Lorem Ipsum is simply dummy text of the printing
+                {profileData.desc}
               </Typography>
               <Box display="flex" flexDirection="row">
                 <EcoIcon />
                 <Typography color="textSecondary">
-                  {' '}
-                  Join on 11 Nov 2000
+                  Join In {new Date(profileData.createdAt).toDateString()}
                 </Typography>
               </Box>
+              {myUser && (
+                <Button variant="contained" color="primary">
+                  Edit profile
+                </Button>
+              )}
               <Box
                 width="80%"
                 display="flex"
                 flexDirection="column"
                 marginTop="100px"
               >
-                <MediemCard />
-                <MediemCard />
-                <MediemCard />
-                <MediemCard />
-                <MediemCard />
-                <MediemCard />
+                {Post.map((post) => (
+                  <ProfileCard key={post._id} post={post} />
+                ))}
               </Box>
             </div>
           </Paper>

@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'flex-start',
   },
   img: {
-    width: '180px',
+    width: '200px',
     height: '180px',
     borderRadius: '40px',
   },
@@ -66,7 +66,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const MediemCard = ({ post }) => {
+const CategoryCard = ({ post }) => {
   const classes = useStyles();
 
   return (
@@ -86,9 +86,11 @@ const MediemCard = ({ post }) => {
                 marginTop="5px"
                 color="gray"
               >
-                <Typography variant="caption">11 Nov 2000</Typography>
+                <Typography variant="caption">
+                  {new Date(post.createdAt).toDateString()}
+                </Typography>
                 <Typography variant="caption" className={classes.author}>
-                  By beerdosan
+                  By <span>{post.author}</span>
                 </Typography>
               </Box>
             </div>
@@ -98,4 +100,4 @@ const MediemCard = ({ post }) => {
     </ThemeProvider>
   );
 };
-export default MediemCard;
+export default CategoryCard;

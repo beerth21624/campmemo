@@ -8,8 +8,8 @@ import { Grid } from '@material-ui/core';
 import MainPost from './MainPost';
 import { Typography } from '@material-ui/core';
 import AssistantIcon from '@material-ui/icons/Assistant';
-import { Button } from '@material-ui/core';
-import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
+import Pagination from '@material-ui/lab/Pagination';
+import { Box } from '@material-ui/core';
 
 const theme = createTheme({
   palette: {
@@ -24,10 +24,6 @@ const theme = createTheme({
 const useStyles = makeStyles((theme) => ({
   root: {
     marginTop: '40px',
-  },
-  btnload: {
-    margin: 'auto',
-    marginTop: '20px',
   },
 }));
 
@@ -47,11 +43,11 @@ const Main = ({ posts }) => {
         {posts.map((post, index) => (
           <MainPost key={index} post={post} />
         ))}
-
-        <Button className={classes.btnload} color="primary">
-          Load more post
-          <KeyboardArrowDownIcon />
-        </Button>
+        <Box display="flex" width="100%" marginTop="50px">
+          <div style={{ margin: 'auto' }}>
+            <Pagination count={10} color="primary" />
+          </div>
+        </Box>
       </Grid>
     </ThemeProvider>
   );

@@ -5,7 +5,6 @@ import React, { useState, useRef, useContext, useEffect } from 'react';
 import { AuthContext } from '../context/authContext/AuthContext';
 // import Editor from '../components/EditorJs';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
-import { PostContextSave } from '../context/postContextSave/PostContextSave';
 import axios from 'axios';
 import {
   createTheme,
@@ -18,7 +17,6 @@ import { Select } from '@material-ui/core';
 import { InputLabel } from '@material-ui/core';
 import { GetUserContextService } from '../context/getUserContext/GetUserContextService';
 import { storage } from '../components/firebase';
-import { set } from 'lodash';
 
 const theme = createTheme({
   palette: {
@@ -49,6 +47,13 @@ const useStyles = makeStyles((theme) => ({
     overflow: 'hidden',
     objectFit: 'cover',
     borderRadius: '10px',
+  },
+  boxWriter: {
+    width: '60vw',
+    [theme.breakpoints.only('xs')]: {
+      width: '80vw',
+    },
+    //
   },
   postTitles: {
     overflow: 'auto',
@@ -94,18 +99,19 @@ function PostEditor() {
   const [title, setTitle] = useState('');
   const desc = useRef('');
 
-  const [filePic, setFilePic] = useState('');
+  const [filePic, setFilePic] = useState(
+    'http://www.tourismchiangmai.org/chiangmaigreencard/public/image/3a2334ddfdd0fe64b6287a916fa0d5ef.png'
+  );
   const [previewImg, setPreviewImg] = useState('');
-  const [alertNoImg, setAlertNoImg] = useState(false);
   const [alertNoTitle, setAlertNoTitle] = useState(false);
 
-  const [category, setCategory] = useState('');
-  const [userData, setuserData] = useState({});
+  const [category, setCategory] = useState('camping');
+  const [userData, setUserData] = useState({});
 
   useEffect(() => {
     const callUser = async () => {
       const authorUser = await GetUserContextService(user);
-      setuserData(authorUser);
+      setUserData(authorUser);
     };
     callUser();
   }, []);
@@ -122,13 +128,12 @@ function PostEditor() {
         title: title,
         desc: desc.current.value,
         photo: filePic,
-        userId: '611e33b8902b51ea97af1089',
+        userId: userData._id,
         category: category,
         author: userData.username,
+        authorPic: userData.photo,
       });
-      console.log(createPost);
       createPost && window.location.replace('/');
-      console.log(createPost);
     } catch (err) {
       console.log(err);
     }
@@ -147,7 +152,6 @@ function PostEditor() {
       };
 
       Upload(filePic);
-      setAlertNoImg(false);
     }
   };
 
@@ -174,9 +178,6 @@ function PostEditor() {
   };
 
   const handleSaveNoImg = () => {
-    if (!filePic) {
-      setAlertNoImg(true);
-    }
     if (!title) {
       setAlertNoTitle(true);
     }
@@ -192,7 +193,7 @@ function PostEditor() {
           <Grid item md={8}>
             <Box p={5} textAlign="center">
               <Box
-                width="60vw"
+                className={classes.boxWriter}
                 minHeight="75vh"
                 borderRadius="10px"
                 mt={2}
@@ -260,7 +261,7 @@ function PostEditor() {
                     <option value="fishing">fishing</option>
                   </Select>
                 </FormControl>
-                {filePic && title ? (
+                {title ? (
                   <Button
                     variant="contained"
                     color="primary"
@@ -279,11 +280,6 @@ function PostEditor() {
                   >
                     publish
                   </Button>
-                )}
-                {alertNoImg && (
-                  <Typography style={{ color: 'red', marginTop: 10 }}>
-                    please add a cover image!
-                  </Typography>
                 )}
                 {alertNoTitle && (
                   <Typography style={{ color: 'red', marginTop: 10 }}>

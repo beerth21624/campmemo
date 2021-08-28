@@ -29,10 +29,19 @@ const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: '#F3F3F3',
     boxShadow: 'none',
-    maxHeight: '64vh',
+    maxHeight: 600,
   },
   media: {
-    height: '40vh',
+    height: 350,
+    [theme.breakpoints.only('md')]: {
+      height: 300,
+    },
+    [theme.breakpoints.only('sm')]: {
+      height: 290,
+    },
+    [theme.breakpoints.only('xs')]: {
+      height: 250,
+    },
     borderRadius: '10px',
   },
   card: {
@@ -44,15 +53,28 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: '5px',
     color: 'white',
     padding: '3px',
-    top: 260,
+    top: 300,
     left: 20,
     zIndex: 9,
+    [theme.breakpoints.only('lg')]: {
+      top: 310,
+      left: 20,
+    },
+    [theme.breakpoints.only('md')]: {
+      top: 240,
+      left: 20,
+    },
+    [theme.breakpoints.down('sm')]: {
+      top: 220,
+      left: 20,
+    },
   },
+
   boxitem: {
-    margin: '15px 5px',
+    marginRight: '10px',
   },
   cardcontent: {
-    minHeight: '100px',
+    minHeight: 145,
   },
   title: {
     width: '100%',
@@ -112,26 +134,32 @@ const MainPost = ({ post }) => {
                 </Typography>
               </CardContent>
 
-              <Box display="flex" alignItems="center" marginLeft="1rem">
-                <Avatar
-                  alt="Remy Sharp"
-                  src="https://pbs.twimg.com/profile_images/1320044036179197952/hHmbojkt_400x400.jpg"
-                  className={classes.boxitem}
-                />
+              <Box
+                display="flex"
+                alignItems="center"
+                marginLeft="1rem"
+                justifyContent="space-between"
+              >
+                <Box display="flex" alignItems="center" flexDirection="row">
+                  <Avatar
+                    alt="Remy Sharp"
+                    src={post.authorPic}
+                    className={classes.boxitem}
+                  />
+                  <Typography
+                    variant="subtitle1"
+                    color="textSecondary"
+                    className={classes.boxitem}
+                  >
+                    By <span>{post.author}</span>
+                  </Typography>
+                </Box>
                 <Typography
                   variant="subtitle1"
                   color="textSecondary"
                   className={classes.boxitem}
                 >
-                  By beerdosan
-                </Typography>
-                <Typography
-                  variant="subtitle1"
-                  color="textSecondary"
-                  className={classes.boxitem}
-                >
-                  {' '}
-                  11 Nov 2000
+                  {new Date(post.createdAt).toDateString()}
                 </Typography>
               </Box>
             </CardActionArea>
