@@ -11,6 +11,7 @@ import CardContent from '@material-ui/core/CardContent';
 import { Typography } from '@material-ui/core';
 import { Box } from '@material-ui/core';
 import { CardActionArea } from '@material-ui/core';
+import { Link } from 'react-router-dom';
 
 const theme = createTheme({
   palette: {
@@ -84,34 +85,39 @@ export default function ItemFeature({ post }) {
   return (
     <ThemeProvider theme={theme}>
       <Grid item>
-        <Card className={classes.paper}>
-          <CardActionArea>
-            <CardMedia className={classes.media} image={post.photo} />
-            <CardContent className={classes.content}>
-              <Box display="flex" flexDirection="column">
-                <div>
-                  <Typography
-                    variant="caption"
-                    style={{ backgroundColor: 'tomato', padding: '3px' }}
-                  >
-                    {post.category}
-                  </Typography>
-                  <Typography className={classes.title} variant="h6">
-                    {post.title}
-                  </Typography>
-                </div>
-                <div className={classes.author}>
-                  <Typography variant="caption">
-                    By <span>{post.author}</span>
-                  </Typography>
-                  <Typography variant="caption" style={{ marginLeft: '10px' }}>
-                    {new Date(post.createdAt).toDateString()}
-                  </Typography>
-                </div>
-              </Box>
-            </CardContent>
-          </CardActionArea>
-        </Card>
+        <Link to={'/post/' + post._id}>
+          <Card className={classes.paper}>
+            <CardActionArea>
+              <CardMedia className={classes.media} image={post.photo} />
+              <CardContent className={classes.content}>
+                <Box display="flex" flexDirection="column">
+                  <div>
+                    <Typography
+                      variant="caption"
+                      style={{ backgroundColor: 'tomato', padding: '3px' }}
+                    >
+                      {post.category}
+                    </Typography>
+                    <Typography className={classes.title} variant="h6">
+                      {post.title}
+                    </Typography>
+                  </div>
+                  <div className={classes.author}>
+                    <Typography variant="caption">
+                      By <span>{post.author}</span>
+                    </Typography>
+                    <Typography
+                      variant="caption"
+                      style={{ marginLeft: '10px' }}
+                    >
+                      {new Date(post.createdAt).toDateString()}
+                    </Typography>
+                  </div>
+                </Box>
+              </CardContent>
+            </CardActionArea>
+          </Card>
+        </Link>
       </Grid>
     </ThemeProvider>
   );

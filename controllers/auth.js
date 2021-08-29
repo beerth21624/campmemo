@@ -2,7 +2,7 @@ const User = require('../models/User');
 // const ErrorResponse = require('../middleware/error');
 
 exports.register = async (req, res, next) => {
-  const { username, email, password } = req.body;
+  const { nameAuthor, username, email, password } = req.body;
 
   const validateUser = await User.findOne({ email });
   console.log(validateUser);
@@ -10,6 +10,7 @@ exports.register = async (req, res, next) => {
 
   try {
     const user = await User.create({
+      nameAuthor,
       username,
       email,
       password,

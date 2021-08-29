@@ -69,10 +69,11 @@ export default function SignUp() {
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [nameAuthor, setNameAuthor] = useState('');
 
   const hadleRegister = async (e) => {
     e.preventDefault();
-    register({ email, username, password }, dispatch);
+    register({ email, username, password, nameAuthor }, dispatch);
   };
 
   return (
@@ -103,6 +104,19 @@ export default function SignUp() {
             </Typography>
             <form className={classes.form} noValidate onSubmit={hadleRegister}>
               <Grid container spacing={2}>
+                <Grid item xs={12}>
+                  <TextField
+                    autoComplete="name"
+                    name="name"
+                    variant="outlined"
+                    required
+                    fullWidth
+                    id="name"
+                    label="name"
+                    autoFocus
+                    onChange={(e) => setNameAuthor(e.target.value)}
+                  />
+                </Grid>
                 <Grid item xs={12}>
                   <TextField
                     autoComplete="username"

@@ -37,7 +37,6 @@ const Main = () => {
   useEffect(() => {
     const fetchPost = async () => {
       const res = await axios.get('/post?page=' + page);
-      console.log(res);
       setPosts(res.data.data);
       setPageCount(res.data.pages);
     };
@@ -50,12 +49,17 @@ const Main = () => {
   return (
     <ThemeProvider theme={theme}>
       <Grid item container md={9} className={classes.root}>
-        <Grid container md={12} direction="row">
+        <Box
+          width="100%"
+          display="flex"
+          flexDirection="row"
+          marginBottom="30px"
+        >
           <AssistantIcon fontSize="large" />
-          <Typography variant="h4" gutterBottom>
+          <Typography variant="h4">
             <b>Today's top highlights</b>
           </Typography>
-        </Grid>
+        </Box>
         {posts.map((post, index) => (
           <MainPost key={index} post={post} />
         ))}

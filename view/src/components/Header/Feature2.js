@@ -40,7 +40,6 @@ export default function Feature2() {
     };
     fetchPost();
   }, []);
-  console.log(Post);
   return (
     <ThemeProvider theme={theme}>
       <Grid item container direction="column" md={6} className={classes.root}>

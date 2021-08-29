@@ -10,13 +10,18 @@ import { Box } from '@material-ui/core';
 import { Typography } from '@material-ui/core';
 import Footer from '../components/footer/Footer';
 import EcoIcon from '@material-ui/icons/Eco';
-import ProfileCard from '../components/ProfileCard';
+import ProfileCard from '../components/profile/ProfileCard';
 import axios from 'axios';
 import { AuthContext } from '../context/authContext/AuthContext';
 import { useLocation } from 'react-router-dom';
 import { GetUserContextService } from '../context/getAuthorContext /GetAuthorContextService';
 import { Button } from '@material-ui/core';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
+
+import Modal from '@material-ui/core/Modal';
+import Backdrop from '@material-ui/core/Backdrop';
+import Fade from '@material-ui/core/Fade';
+import EditProfile from '../components/profile/EditProfile';
 
 const theme = createTheme({
   palette: {
@@ -33,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: '#191a1f',
     paddingBottom: '30px',
   },
-  paper: {
+  paperBack: {
     height: '30vh',
     backgroundColor: '#191a1f',
   },
@@ -60,7 +65,7 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: '50%',
     marginTop: '-17vh',
   },
-  username: {
+  name: {
     marginTop: '20px',
   },
   desc: {
@@ -68,6 +73,17 @@ const useStyles = makeStyles((theme) => ({
   },
   btnload: {
     margin: '40px 0',
+  },
+  modal: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  paper: {
+    backgroundColor: theme.palette.background.paper,
+    border: '2px solid #000',
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(2, 4, 3),
   },
 }));
 
@@ -80,7 +96,9 @@ const Profile = () => {
   const [profileData, setProfileData] = useState('');
   const [Post, setPost] = useState([]);
   const [limit, setLimit] = useState(6);
-
+  const [open, setOpen] = useState(false);
+  const [updated, setUpdated] = useState(false);
+  const [rerender, setRerender] = useState(true);
   useEffect(() => {
     const fetchUser = async () => {
       const currentUser = await GetUserContextService(user);
@@ -95,9 +113,10 @@ const Profile = () => {
         '/post/profile/' + UserInput + '?limit=' + limit
       );
       setPost(posts.data);
+      setUpdated(false);
     };
     fetchUser();
-  }, [limit]);
+  }, [limit, updated, rerender]);
 
   const handleLimit = () => {
     const newLimit = limit + 5;
@@ -105,10 +124,18 @@ const Profile = () => {
     console.log(newLimit);
   };
 
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <div className={classes.root}>
-        <Paper square className={classes.paper}></Paper>
+        <Paper square className={classes.paperBack}></Paper>
         <Container maxWidth="md" className={classes.container}>
           <Paper className={classes.paperRoot}>
             <div className={classes.profileContainer}>
@@ -118,15 +145,11 @@ const Profile = () => {
                 alt=""
               ></img>
 
-              <Typography
-                variant="h4"
-                className={classes.username}
-                gutterBottom
-              >
-                <b>{profileData.username}</b>
+              <Typography variant="h4" className={classes.name} gutterBottom>
+                <b>{profileData.nameAuthor}</b>
               </Typography>
               <Typography className={classes.desc} paragraph>
-                {profileData.desc}
+                {profileData.profileDesc}
               </Typography>
               <Box display="flex" flexDirection="row">
                 <EcoIcon />
@@ -135,10 +158,36 @@ const Profile = () => {
                 </Typography>
               </Box>
               {myUser && (
-                <Button variant="contained" color="primary">
+                <Button
+                  variant="contained"
+                  color="primary"
+                  style={{ marginTop: '10px' }}
+                  onClick={handleOpen}
+                >
                   Edit profile
                 </Button>
               )}
+              <Modal
+                aria-labelledby="transition-modal-title"
+                aria-describedby="transition-modal-description"
+                className={classes.modal}
+                open={open}
+                onClose={handleClose}
+                closeAfterTransition
+                BackdropComponent={Backdrop}
+                BackdropProps={{
+                  timeout: 500,
+                }}
+              >
+                <Fade in={open}>
+                  <EditProfile
+                    profile={profileData}
+                    open={setOpen}
+                    updated={setUpdated}
+                  />
+                </Fade>
+              </Modal>
+
               <Box
                 width="80%"
                 display="flex"
@@ -146,7 +195,12 @@ const Profile = () => {
                 marginTop="100px"
               >
                 {Post.map((post) => (
-                  <ProfileCard key={post._id} post={post} />
+                  <ProfileCard
+                    key={post._id}
+                    post={post}
+                    myUser={myUser}
+                    updated={setUpdated}
+                  />
                 ))}
               </Box>
               {Post && (

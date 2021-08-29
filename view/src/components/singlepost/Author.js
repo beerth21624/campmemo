@@ -61,22 +61,22 @@ const Author = ({ author }) => {
 
   return (
     <ThemeProvider theme={theme}>
-      <Grid item md={2} style={{ paddingRight: '20px' }}>
+      <Grid item md={2} style={{ paddingRight: '10px' }}>
         {Author && (
           <>
             <Card className={classes.root}>
               <CardMedia
                 className={classes.media}
-                image="https://images.unsplash.com/photo-1581456495146-65a71b2c8e52?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTd8fHBlcnNvbnxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60"
+                image={Author.profilePic}
                 title=""
                 style={{ borderRadius: '50%' }}
               />
               <CardContent>
                 <Typography gutterBottom variant="h5" component="h2">
-                  {Author.username}
+                  {Author.nameAuthor}
                 </Typography>
                 <Typography variant="body2" color="textSecondary" component="p">
-                  {Author.desc}
+                  {Author.profileDesc}
                 </Typography>
               </CardContent>
 

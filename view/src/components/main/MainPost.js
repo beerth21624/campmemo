@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   createTheme,
   makeStyles,
@@ -14,6 +14,7 @@ import { Box } from '@material-ui/core';
 import { Avatar } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { ConvertPost } from './ConvertPost';
+import axios from 'axios';
 
 const theme = createTheme({
   palette: {
@@ -98,6 +99,17 @@ const useStyles = makeStyles((theme) => ({
 
 const MainPost = ({ post }) => {
   const classes = useStyles();
+  const [author, setAuthor] = useState('');
+  const [profilePic, setProfilePic] = useState('');
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      const getUser = await axios.get('/user/author/' + post.author);
+      setAuthor(getUser.data.nameAuthor);
+      setProfilePic(getUser.data.profilePic);
+    };
+    fetchUser();
+  }, []);
 
   return (
     <ThemeProvider theme={theme}>
@@ -143,7 +155,7 @@ const MainPost = ({ post }) => {
                 <Box display="flex" alignItems="center" flexDirection="row">
                   <Avatar
                     alt="Remy Sharp"
-                    src={post.authorPic}
+                    src={profilePic}
                     className={classes.boxitem}
                   />
                   <Typography
@@ -151,7 +163,7 @@ const MainPost = ({ post }) => {
                     color="textSecondary"
                     className={classes.boxitem}
                   >
-                    By <span>{post.author}</span>
+                    By <span>{author}</span>
                   </Typography>
                 </Box>
                 <Typography

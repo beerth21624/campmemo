@@ -66,6 +66,7 @@ const useStyles = makeStyles((theme) => ({
       outline: 'none',
     },
     fontSize: '2.2rem',
+    fontFamily: 'Roboto',
     fontWeight: '600',
     resize: 'none',
     marginBottom: '10px',
@@ -89,6 +90,7 @@ const useStyles = makeStyles((theme) => ({
     resize: 'none',
     paddingBottom: '40px',
     fontSize: '1.3rem',
+    fontFamily: 'Roboto',
   },
 }));
 
@@ -205,13 +207,13 @@ function PostEditor() {
                 <div className={classes.addCoverImg}>
                   <input
                     accept="image/*"
-                    id="contained-button-file"
+                    id="fileImg"
                     multiple
                     type="file"
                     className={classes.input}
                     onChange={handleFilePic}
                   />
-                  <label htmlFor="contained-button-file">
+                  <label htmlFor="fileImg">
                     <Button variant="outlined" color="primary" component="span">
                       Add a cover image
                     </Button>

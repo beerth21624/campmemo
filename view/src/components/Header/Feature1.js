@@ -74,9 +74,6 @@ export default function Feature1() {
             >
               <Typography color="textSecondary">CREATE YOUR POST</Typography>
             </Button>
-            {/* <Link href="#" variant="body2" style={{color:'white'}}>
-                  {"Don't have an account? Sign Up"}
-                </Link> */}
           </Box>
         </Paper>
       </Grid>

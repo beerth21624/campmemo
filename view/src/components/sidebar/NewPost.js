@@ -14,7 +14,6 @@ const NewPost = () => {
     fetchPost();
   }, []);
 
-  console.log(post);
   return (
     <Box
       display="flex"

@@ -88,3 +88,31 @@ exports.getProfilePost = async (req, res, next) => {
     res.status(500).json(err);
   }
 };
+
+//updatepost
+
+exports.updatePost = async (req, res) => {
+  try {
+    const update = await Post.findByIdAndUpdate(
+      req.params.id,
+      {
+        $set: req.body,
+      },
+      { new: true }
+    );
+    res.status(200).json(update);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+};
+
+//deletepost
+
+exports.deletePost = async (req, res) => {
+  try {
+    await Post.findByIdAndDelete(req.params.id);
+    res.status(200).json('deleted');
+  } catch (err) {
+    res.status(500).json(err);
+  }
+};
