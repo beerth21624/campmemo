@@ -29,8 +29,13 @@ app.use('/api/post/', postRoute);
 app.use('/api/private/', privateRoute);
 app.use('/api/category/', categoryRoute);
 app.use('/api/user', userRoute);
+app.use(express.static(path.join(__dirname, '/view')));
 
-app.listen(5000, () => {
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '/view/build', 'index.html'));
+});
+
+app.listen(process.env.PORT || 5000, () => {
   console.log('backend start');
 });
 
