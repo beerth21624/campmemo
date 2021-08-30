@@ -2,6 +2,7 @@
   "name": "client",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:5000/api",
   "dependencies": {
     "@canburaks/text-align-editorjs": "^1.0.4",
     "@ckeditor/ckeditor5-build-classic": "^29.1.0",

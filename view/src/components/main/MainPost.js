@@ -13,7 +13,6 @@ import { Grid } from '@material-ui/core';
 import { Box } from '@material-ui/core';
 import { Avatar } from '@material-ui/core';
 import { Link } from 'react-router-dom';
-import { ConvertPost } from './ConvertPost';
 import axios from 'axios';
 
 const theme = createTheme({

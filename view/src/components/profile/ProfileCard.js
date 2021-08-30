@@ -40,11 +40,21 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'row',
     padding: '6px',
     justifyContent: 'flex-start',
+    [theme.breakpoints.only('xs')]: {
+      padding: 1,
+      flexDirection: 'column',
+    },
   },
   img: {
     width: '200px',
     height: '180px',
     borderRadius: '40px',
+    [theme.breakpoints.only('xs')]: {
+      borderRadius: '10px',
+      width: '260px',
+      height: '150px',
+      marginBottom: 10,
+    },
   },
   textContainer: {
     marginLeft: '6px',
@@ -86,6 +96,20 @@ const useStyles = makeStyles((theme) => ({
   },
   button: {
     width: 90,
+    [theme.breakpoints.down('sm')]: {
+      width: 30,
+    },
+  },
+  boxCard: {
+    [theme.breakpoints.only('xs')]: {
+      flexDirection: 'column',
+    },
+  },
+  buttonEdit: {
+    [theme.breakpoints.only('xs')]: {
+      flexDirection: 'row',
+      margin: '20px 0',
+    },
   },
 }));
 
@@ -113,7 +137,7 @@ const ProfileCard = ({ post, myUser, updated }) => {
   return (
     <ThemeProvider theme={theme}>
       <Card className={classes.root}>
-        <Box display="flex" flexDirection="row">
+        <Box display="flex" flexDirection="row" className={classes.boxCard}>
           <Link to={'/post/' + post._id} className="link">
             <CardActionArea className={classes.card}>
               <img className={classes.img} src={post.photo} alt="" />
@@ -145,6 +169,7 @@ const ProfileCard = ({ post, myUser, updated }) => {
               justifyContent="center"
               marginLeft="15px"
               style={{ gap: 15 }}
+              className={classes.buttonEdit}
             >
               <Button
                 variant="contained"

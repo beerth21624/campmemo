@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
   createTheme,
   makeStyles,
@@ -30,6 +30,9 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: theme.shadows[5],
     padding: theme.spacing(4, 8, 6),
     textAlign: 'center',
+    [theme.breakpoints.only('xs')]: {
+      padding: theme.spacing(1, 0, 3, 2),
+    },
   },
   img: {
     width: 150,
@@ -55,6 +58,12 @@ const useStyles = makeStyles((theme) => ({
   },
   button: {
     width: 100,
+  },
+  close: {
+    marginRight: '-30px',
+    [theme.breakpoints.only('xs')]: {
+      marginRight: '0px',
+    },
   },
 }));
 
@@ -109,7 +118,7 @@ const EditProfile = ({ profile, open, updated }) => {
   return (
     <ThemeProvider theme={theme}>
       <div className={classes.paper}>
-        <Box display="flex" justifyContent="flex-end" marginRight="-30px">
+        <Box display="flex" justifyContent="flex-end" className={classes.close}>
           <CancelIcon
             onClick={() => open(false)}
             style={{ cursor: 'pointer' }}

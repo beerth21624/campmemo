@@ -57,6 +57,9 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     flexDirection: 'column',
     padding: '20px',
+    [theme.breakpoints.down('sm')]: {
+      padding: '0px',
+    },
   },
   img: {
     width: 200,
@@ -67,9 +70,15 @@ const useStyles = makeStyles((theme) => ({
   },
   name: {
     marginTop: '20px',
+    [theme.breakpoints.only('xs')]: {
+      fontSize: 28,
+    },
   },
   desc: {
     padding: '0 20vh',
+    [theme.breakpoints.only('xs')]: {
+      padding: '0 5vh',
+    },
   },
   btnload: {
     margin: '40px 0',

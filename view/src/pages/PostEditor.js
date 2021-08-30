@@ -29,6 +29,11 @@ const theme = createTheme({
   },
 });
 const useStyles = makeStyles((theme) => ({
+  root: {
+    [theme.breakpoints.only('xs')]: {
+      padding: 0,
+    },
+  },
   input: {
     display: 'none',
     right: 0,
@@ -38,20 +43,45 @@ const useStyles = makeStyles((theme) => ({
     margin: '2rem 0 1rem 4rem',
     display: 'flex',
     alignItems: 'center',
+    [theme.breakpoints.only('sm')]: {
+      margin: '1rem 1rem 1rem 1rem',
+    },
+    [theme.breakpoints.only('xs')]: {
+      margin: '1rem 0 1rem 1rem',
+    },
+  },
+  btnAdd: {
+    [theme.breakpoints.only('xs')]: {
+      width: '120px',
+      fontSize: '12px',
+      textAlign: 'center',
+    },
   },
   previewImg: {
-    width: '80px',
-    height: '80px',
-    // display: 'none',
+    width: '100px',
+    height: '90px',
+    marginLeft: '10px',
+    overflow: 'hidden',
+    objectFit: 'cover',
+    borderRadius: '10px',
+    [theme.breakpoints.only('xs')]: {
+      display: 'none',
+    },
+  },
+  previewImg2: {
+    width: '160px',
+    height: '90px',
     marginLeft: '10px',
     overflow: 'hidden',
     objectFit: 'cover',
     borderRadius: '10px',
   },
   boxWriter: {
-    width: '60vw',
-    [theme.breakpoints.only('xs')]: {
-      width: '80vw',
+    width: 'auto',
+    backgroundColor: '#ffffff',
+    border: '1px solid #cccccc',
+    [theme.breakpoints.up('lg')]: {
+      width: '60vw',
     },
     //
   },
@@ -70,6 +100,10 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: '600',
     resize: 'none',
     marginBottom: '10px',
+    [theme.breakpoints.down('sm')]: {
+      width: '70vw',
+      fontSize: '1.4rem',
+    },
   },
   saveButton: {
     marginTop: '17px',
@@ -91,6 +125,15 @@ const useStyles = makeStyles((theme) => ({
     paddingBottom: '40px',
     fontSize: '1.3rem',
     fontFamily: 'Roboto',
+    [theme.breakpoints.down('sm')]: {
+      width: '70vw',
+      fontSize: '1rem',
+    },
+  },
+  recomment: {
+    [theme.breakpoints.down('md')]: {
+      display: 'none',
+    },
   },
 }));
 
@@ -192,17 +235,13 @@ function PostEditor() {
         maxWidth="xl"
       >
         <Grid container md={12}>
-          <Grid item md={8}>
-            <Box p={5} textAlign="center">
+          <Grid item xl={8} lg={8} md={12} xs={12}>
+            <Box p={5} textAlign="center" className={classes.root}>
               <Box
                 className={classes.boxWriter}
                 minHeight="75vh"
                 borderRadius="10px"
                 mt={2}
-                style={{
-                  backgroundColor: '#ffffff',
-                  border: '1px solid #cccccc',
-                }}
               >
                 <div className={classes.addCoverImg}>
                   <input
@@ -214,17 +253,29 @@ function PostEditor() {
                     onChange={handleFilePic}
                   />
                   <label htmlFor="fileImg">
-                    <Button variant="outlined" color="primary" component="span">
+                    <Button
+                      variant="outlined"
+                      color="primary"
+                      component="span"
+                      className={classes.btnAdd}
+                    >
                       Add a cover image
                     </Button>
                   </label>
 
                   {previewImg && (
-                    <img
-                      className={classes.previewImg}
-                      src={previewImg}
-                      alt=""
-                    />
+                    <>
+                      <img
+                        className={classes.previewImg}
+                        src={previewImg}
+                        alt=""
+                      />
+                      <img
+                        className={classes.previewImg2}
+                        src={previewImg}
+                        alt=""
+                      />
+                    </>
                   )}
                 </div>
                 <form className={classes.root} noValidate autoComplete="off">
@@ -291,8 +342,11 @@ function PostEditor() {
               </Box>
             </Box>
           </Grid>
-          <Grid item md={4}>
-            <Typography style={{ marginTop: '40%' }}>
+          <Grid item md={4} lg={4}>
+            <Typography
+              style={{ marginTop: '40%' }}
+              className={classes.recomment}
+            >
               <b>Writing a Great Post Title</b>
               <br />
               Think of your post title as a super short (but compelling!)

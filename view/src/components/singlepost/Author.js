@@ -25,6 +25,12 @@ const theme = createTheme({
   },
 });
 const useStyles = makeStyles((theme) => ({
+  grid: {
+    paddingRight: '10px',
+    [theme.breakpoints.down('sm')]: {
+      order: '2',
+    },
+  },
   root: {
     maxWidth: 345,
     textAlign: 'center',
@@ -34,13 +40,17 @@ const useStyles = makeStyles((theme) => ({
     padding: '20px',
     borderRadius: '30px',
     marginTop: '30px',
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.only('xs')]: {
+      width: '90%',
+    },
+    [theme.breakpoints.only('sm')]: {
       marginLeft: 0,
+      width: '97%',
+      maxWidth: 'none',
     },
     position: 'sticky',
   },
   media: {
-    height: '30vh',
     width: '100px',
     height: '100px',
     margin: 'auto',
@@ -61,10 +71,13 @@ const Author = ({ author }) => {
 
   return (
     <ThemeProvider theme={theme}>
-      <Grid item md={2} style={{ paddingRight: '10px' }}>
+      <Grid item md={2} sm={12} className={classes.grid}>
         {Author && (
           <>
             <Card className={classes.root}>
+              <Typography variant="h5" paragraph>
+                Author
+              </Typography>
               <CardMedia
                 className={classes.media}
                 image={Author.profilePic}

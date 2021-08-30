@@ -34,16 +34,29 @@ const useStyles = makeStyles((theme) => ({
     marginTop: '30px',
     display: 'flex',
     flexDirection: 'column',
+    justifyContent: 'center',
+    [theme.breakpoints.down('sm')]: {
+      order: '1',
+    },
   },
   paper: {
     backgroundColor: 'white',
     width: '90%',
     borderRadius: '30px',
     padding: '40px',
+    [theme.breakpoints.only('sm')]: {
+      width: '90%',
+    },
+    [theme.breakpoints.only('xs')]: {
+      width: '77%',
+    },
   },
   title: {
     fontSize: '2.3rem',
     fontFamily: 'Roboto',
+    [theme.breakpoints.down('sm')]: {
+      fontSize: '1.4rem',
+    },
   },
   coverPic: {
     width: '100%',
@@ -55,6 +68,10 @@ const useStyles = makeStyles((theme) => ({
     fontSize: '1.3rem',
     fontFamily: 'Roboto',
     whiteSpace: 'pre-wrap',
+    wordBreak: 'break-all',
+    [theme.breakpoints.down('sm')]: {
+      fontSize: '1.0rem',
+    },
   },
   comment: {
     backgroundColor: 'white',
@@ -62,6 +79,12 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: '30px',
     padding: '40px',
     marginTop: '20px',
+    [theme.breakpoints.only('sm')]: {
+      width: '90%',
+    },
+    [theme.breakpoints.only('xs')]: {
+      width: '78%',
+    },
   },
   titleEdit: {
     width: '100%',
@@ -69,6 +92,9 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: '600',
     resize: 'none',
     fontFamily: 'Roboto ',
+    [theme.breakpoints.down('sm')]: {
+      fontSize: '1.4rem',
+    },
   },
   descEdit: {
     fontSize: '1.3rem',
@@ -76,6 +102,9 @@ const useStyles = makeStyles((theme) => ({
     whiteSpace: 'pre-wrap',
     width: '100%',
     resize: 'none',
+    [theme.breakpoints.down('sm')]: {
+      fontSize: '1.0rem',
+    },
   },
   input: {
     display: 'none',
@@ -155,8 +184,8 @@ const MainPostSingle = ({ post }) => {
 
   return (
     <ThemeProvider theme={theme}>
-      <Grid item container md={7} className={classes.root}>
-        <Paper width="30vh" className={classes.paper}>
+      <Grid item container md={7} sm={12} className={classes.root}>
+        <Paper className={classes.paper}>
           {modify && titleMod ? (
             <TextareaAutosize
               type="text"

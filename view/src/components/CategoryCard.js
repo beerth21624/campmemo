@@ -31,11 +31,19 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'row',
     padding: '6px',
     justifyContent: 'flex-start',
+    [theme.breakpoints.only('xs')]: {
+      padding: '3px',
+    },
   },
   img: {
     width: '200px',
     height: '180px',
     borderRadius: '40px',
+    [theme.breakpoints.only('xs')]: {
+      width: '130px',
+      height: '120px',
+      borderRadius: '20px',
+    },
   },
   textContainer: {
     marginLeft: '6px',
@@ -52,6 +60,9 @@ const useStyles = makeStyles((theme) => ({
     display: '-webkit-box',
     '-webkit-line-clamp': 1,
     '-webkit-box-orient': 'vertical',
+    [theme.breakpoints.only('xs')]: {
+      fontSize: '1.0rem',
+    },
   },
   desc: {
     overflow: 'hidden',
@@ -60,6 +71,10 @@ const useStyles = makeStyles((theme) => ({
     display: '-webkit-box',
     '-webkit-line-clamp': 4,
     '-webkit-box-orient': 'vertical',
+    [theme.breakpoints.only('xs')]: {
+      '-webkit-line-clamp': 3,
+      fontSize: '0.8rem',
+    },
   },
   author: {
     marginLeft: '10px',

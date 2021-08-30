@@ -16,8 +16,6 @@ import { Avatar } from '@material-ui/core';
 import { GetUserContextService } from '../context/getUserContext/GetUserContextService';
 import { Box } from '@material-ui/core';
 import { Typography } from '@material-ui/core';
-import { Card } from '@material-ui/core';
-import { CardActionArea } from '@material-ui/core';
 
 const theme = createTheme({
   palette: {
@@ -37,6 +35,11 @@ const useStyles = makeStyles((theme) => ({
   btn: {
     marginRight: '10px',
   },
+  user: {
+    [theme.breakpoints.down('sm')]: {
+      display: 'none',
+    },
+  },
 }));
 
 const Navbar = () => {
@@ -53,9 +56,10 @@ const Navbar = () => {
       authorUser && setUserData(authorUser.nameAuthor);
       authorUser && setImage(authorUser.profilePic);
       authorUser && setUserId(authorUser._id);
+      setMenu(null);
     };
     callUser();
-  }, []);
+  }, [user]);
 
   const handleClick = (event) => {
     setMenu(event.currentTarget);
@@ -106,7 +110,11 @@ const Navbar = () => {
                 flexDirection="row"
                 style={{ gap: '10px' }}
               >
-                <Typography variant="subtitle1" color="textSecondary">
+                <Typography
+                  variant="subtitle1"
+                  color="textSecondary"
+                  className={classes.user}
+                >
                   {userData}
                 </Typography>
                 <Avatar alt="Remy Sharp" src={image} onClick={handleClick} />

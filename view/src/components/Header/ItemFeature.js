@@ -48,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
     zIndex: 10,
     color: 'white',
     [theme.breakpoints.only('xs')]: {
-      paddingTop: '5rem',
+      paddingTop: '4rem',
     },
     [theme.breakpoints.only('sm')]: {
       paddingTop: '8rem',
