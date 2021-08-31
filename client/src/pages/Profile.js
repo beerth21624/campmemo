@@ -139,7 +139,7 @@ const Profile = () => {
   const handleClose = () => {
     setOpen(false);
   };
-
+  console.log(Post.length);
   return (
     <ThemeProvider theme={theme}>
       <div className={classes.root}>
@@ -211,7 +211,7 @@ const Profile = () => {
                   />
                 ))}
               </Box>
-              {Post && (
+              {Post.length >= 6 && (
                 <Button
                   className={classes.btnload}
                   color="primary"
