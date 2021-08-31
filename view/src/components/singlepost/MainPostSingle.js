@@ -9,7 +9,6 @@ import { Paper } from '@material-ui/core';
 import { Typography } from '@material-ui/core';
 import Comment from './Comment';
 import CreateIcon from '@material-ui/icons/Create';
-import { TextFields } from '@material-ui/icons';
 import { TextareaAutosize } from '@material-ui/core';
 import { Button } from '@material-ui/core';
 import { storage } from '../firebase';
@@ -136,7 +135,7 @@ const MainPostSingle = ({ post }) => {
       setPreviewImg(post.photo);
     };
     fetchUser();
-  }, [post]);
+  }, [post, pathUser, user]);
 
   const handleSave = async () => {
     const saved = await axios.put('/post/update/' + post._id, {

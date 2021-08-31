@@ -64,7 +64,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignUp() {
   const classes = useStyles();
-  const { error, dispatch } = useContext(AuthContext);
+  const { error, errorMsg, dispatch } = useContext(AuthContext);
 
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
@@ -158,7 +158,7 @@ export default function SignUp() {
               </Grid>
               {error && (
                 <Typography variant="caption" style={{ color: 'red' }}>
-                  invalid credentials or you have an account please login!
+                  {errorMsg}
                 </Typography>
               )}
               <Button

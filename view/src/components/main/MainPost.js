@@ -108,7 +108,7 @@ const MainPost = ({ post }) => {
       setProfilePic(getUser.data.profilePic);
     };
     fetchUser();
-  }, []);
+  }, [post.author]);
 
   return (
     <ThemeProvider theme={theme}>

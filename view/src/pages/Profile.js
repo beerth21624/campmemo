@@ -107,7 +107,6 @@ const Profile = () => {
   const [limit, setLimit] = useState(6);
   const [open, setOpen] = useState(false);
   const [updated, setUpdated] = useState(false);
-  const [rerender, setRerender] = useState(true);
   useEffect(() => {
     const fetchUser = async () => {
       const currentUser = await GetUserContextService(user);
@@ -125,7 +124,7 @@ const Profile = () => {
       setUpdated(false);
     };
     fetchUser();
-  }, [limit, updated, rerender]);
+  }, [limit, updated, UserInput, user]);
 
   const handleLimit = () => {
     const newLimit = limit + 5;

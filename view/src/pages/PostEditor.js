@@ -159,7 +159,7 @@ function PostEditor() {
       setUserData(authorUser);
     };
     callUser();
-  }, []);
+  }, [user]);
 
   useEffect(() => {
     if (title) {

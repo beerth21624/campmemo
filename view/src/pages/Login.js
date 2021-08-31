@@ -68,7 +68,7 @@ export default function SignIn() {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const { error, dispatch } = useContext(AuthContext);
+  const { error, errorMsg, dispatch } = useContext(AuthContext);
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -126,7 +126,7 @@ export default function SignIn() {
               />
               {error && (
                 <Typography variant="caption" style={{ color: 'red' }}>
-                  invalid email or password!
+                  {errorMsg}
                 </Typography>
               )}
               <Button
@@ -138,12 +138,7 @@ export default function SignIn() {
               >
                 Login
               </Button>
-              <Grid container>
-                <Grid item xs>
-                  <Link href="#" variant="body2" color="secondary">
-                    Forgot password?
-                  </Link>
-                </Grid>
+              <Grid item container justifyContent="flex-end">
                 <Grid item>
                   <Link href="/register" variant="body2" color="secondary">
                     {"Don't have an account? Sign Up"}

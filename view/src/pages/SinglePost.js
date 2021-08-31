@@ -44,7 +44,7 @@ const Post = () => {
       } catch (err) {}
     };
     fetchPost();
-  }, []);
+  }, [path]);
 
   return (
     <ThemeProvider theme={theme}>

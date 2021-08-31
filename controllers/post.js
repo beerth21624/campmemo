@@ -1,7 +1,7 @@
 const Post = require('../models/Post');
 
 //create post
-exports.createPost = async (req, res, next) => {
+exports.createPost = async (req, res) => {
   try {
     const newPost = await Post.create({
       title: req.body.title,
@@ -19,7 +19,7 @@ exports.createPost = async (req, res, next) => {
 };
 
 //getpost
-exports.getPost = async (req, res, next) => {
+exports.getPost = async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
     res.status(200).json(post);
@@ -29,7 +29,7 @@ exports.getPost = async (req, res, next) => {
 };
 
 // get all post
-exports.getAllPost = async (req, res, next) => {
+exports.getAllPost = async (req, res) => {
   const pageSize = 10;
   const page = parseInt(req.query.page) || 1;
   const skip = (page - 1) * pageSize;
@@ -51,7 +51,7 @@ exports.getAllPost = async (req, res, next) => {
 };
 
 //get new post(5)
-exports.getNewPost = async (req, res, next) => {
+exports.getNewPost = async (req, res) => {
   try {
     const Posts = await Post.find().sort({ createdAt: -1 }).limit(5);
 
@@ -62,7 +62,7 @@ exports.getNewPost = async (req, res, next) => {
 };
 
 //get header post(2)
-exports.getHeaderPost = async (req, res, next) => {
+exports.getHeaderPost = async (req, res) => {
   try {
     const Posts = await Post.aggregate([
       {
@@ -78,7 +78,7 @@ exports.getHeaderPost = async (req, res, next) => {
 };
 
 //get profile post
-exports.getProfilePost = async (req, res, next) => {
+exports.getProfilePost = async (req, res) => {
   const limits = parseInt(req.query.limit);
   try {
     const post = await Post.find({ userId: req.params.id }).limit(limits);

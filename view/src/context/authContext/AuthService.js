@@ -15,8 +15,7 @@ export const login = async (user, dispatch) => {
     dispatch(loginSuccess(userToken.data.token));
     // console.log(userData);
   } catch (err) {
-    console.log(err);
-    dispatch(loginFail());
+    dispatch(loginFail(err.response.data.error));
   }
 };
 
@@ -25,9 +24,8 @@ export const register = async (user, dispatch) => {
   dispatch(registerStart());
   try {
     const userToken = await axios.post('auth/register', user);
-    // userData && window.location.replace('/login');
     dispatch(loginSuccess(userToken.data.token));
   } catch (err) {
-    dispatch(registerFail());
+    dispatch(registerFail(err.response.data.error));
   }
 };

@@ -1,5 +1,5 @@
 const Post = require('../models/Post');
-exports.Category = async (req, res, next) => {
+exports.Category = async (req, res) => {
   const pageSize = 9;
   const page = parseInt(req.query.page) || 1;
   const skip = (page - 1) * pageSize;

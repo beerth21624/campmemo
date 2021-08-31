@@ -25,7 +25,7 @@ const UserSchema = new mongoose.Schema(
     password: {
       type: String,
       require: [true, 'please enter password'],
-      minlength: [8, 'Please enter password more than 6 characters'],
+      minlength: [8, 'Please enter password more than 8 characters'],
       select: false,
     },
     profileDesc: {
@@ -48,12 +48,8 @@ const UserSchema = new mongoose.Schema(
 );
 
 UserSchema.pre('save', async function (next) {
-  // if (!this.isModified('password')) {
-  //   next();
-  // }
   const salt = await bcrypt.genSalt(10);
   this.password = await bcrypt.hash(this.password, salt);
-  // next();
 });
 
 UserSchema.methods.matchPassword = async function (enterPassword) {
@@ -65,16 +61,5 @@ UserSchema.methods.getSignedJwtToken = function () {
     expiresIn: process.env.JWT_EXPIRE,
   });
 };
-
-// UserSchema.methods.getResetPasswordToken = function () {
-//   const resetToken = crypto.randomBytes(20).toString('hex'); //เป็นการสร้างข้อทูลแบบสุ่มจะส่งคืนเป็นบัฟเฟอร์จึงต้องแปลงโดยใช้tostring(hex)คือแปงเป็นเลขฐาน16(0-9) A B C D F
-//   this.resetPasswordToken = crypto
-//     .createHash('sha256')
-//     .update(resetToken)
-//     .digest('hex');
-
-//   this.resetPasswordExpire = Date.now() + 10 * (60 * 1000);
-//   return resetToken;
-// };
 
 module.exports = mongoose.model('User', UserSchema);
