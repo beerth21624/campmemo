@@ -23,7 +23,9 @@ mongoose
     console.log(err);
     process.exit(1);
   });
-
+app.get('/', (req, res) => {
+  res.send('hello');
+});
 app.use('/api/auth/', authRoute);
 app.use('/api/post/', postRoute);
 app.use('/api/private/', privateRoute);
@@ -33,8 +35,3 @@ app.use('/api/user', userRoute);
 app.listen(process.env.PORT || 5000, () => {
   console.log('backend start');
 });
-
-// process.on('unhandledRejection', (err, promise) => {
-//   console.log(`Logged Error: ${err.message}`);
-//   server.close(() => process.exit(1));
-// });
