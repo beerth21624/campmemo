@@ -80,7 +80,7 @@ const Navbar = () => {
         <div className={classes.root}>
           <Link to="/">
             <img
-              src="/images/logo.png"
+              src="https://firebasestorage.googleapis.com/v0/b/campmemo-1fee1.appspot.com/o/Screen_Shot_2564-07-31_at_17.55.15-removebg-preview.png?alt=media&token=7f14ae24-ccb6-4b14-b381-809f6500f758"
               alt=""
               style={{ height: '60px', width: '140px' }}
             />

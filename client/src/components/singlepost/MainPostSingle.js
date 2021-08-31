@@ -4,6 +4,7 @@ import {
   makeStyles,
   ThemeProvider,
 } from '@material-ui/core/styles';
+import { Link } from 'react-router-dom';
 import { Grid } from '@material-ui/core';
 import { Paper } from '@material-ui/core';
 import { Typography } from '@material-ui/core';
@@ -258,14 +259,15 @@ const MainPostSingle = ({ post }) => {
               >
                 save
               </Button>
-              <Button
-                variant="contained"
-                color="secondary"
-                className={classes.button}
-                href={'/profile/' + post.userId}
-              >
-                cancle
-              </Button>
+              <Link to={'/profile/' + post.userId} className="link">
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  className={classes.button}
+                >
+                  cancle
+                </Button>
+              </Link>
             </Box>
           )}
         </Paper>
