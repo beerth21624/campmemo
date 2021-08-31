@@ -73,7 +73,7 @@ const CategoryShow = () => {
 
   useEffect(() => {
     const fetchCat = async () => {
-      const cats = await axios.get('/category/' + path + '?page=' + page);
+      const cats = await axios.get('/api/category/' + path + '?page=' + page);
       setCat(cats.data.data);
       setPageCount(cats.data.pages);
     };

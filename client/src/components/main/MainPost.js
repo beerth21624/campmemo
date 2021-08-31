@@ -103,7 +103,7 @@ const MainPost = ({ post }) => {
 
   useEffect(() => {
     const fetchUser = async () => {
-      const getUser = await axios.get('/user/author/' + post.author);
+      const getUser = await axios.get('/api/user/author/' + post.author);
       setAuthor(getUser.data.nameAuthor);
       setProfilePic(getUser.data.profilePic);
     };

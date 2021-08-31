@@ -126,7 +126,7 @@ const ProfileCard = ({ post, myUser, updated }) => {
   };
   const handleDeletePost = async () => {
     try {
-      const success = await axios.delete('/post/delete/' + post._id);
+      const success = await axios.delete('/api/post/delete/' + post._id);
       success && setOpen(false);
       success && updated(true);
     } catch (err) {

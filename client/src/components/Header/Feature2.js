@@ -35,7 +35,7 @@ export default function Feature2() {
   const [Post, setPost] = useState([]);
   useEffect(() => {
     const fetchPost = async () => {
-      const post = await axios.get('/post/header');
+      const post = await axios.get('/api/post/header');
       setPost(post.data);
     };
     fetchPost();

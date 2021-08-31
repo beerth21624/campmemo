@@ -78,7 +78,7 @@ const EditProfile = ({ profile, open, updated }) => {
   const [descMod, setDescMod] = useState(false);
 
   const handleSave = async () => {
-    const updateUser = await axios.put('/user/updateUser/' + profile._id, {
+    const updateUser = await axios.put('/api/user/updateUser/' + profile._id, {
       image: image,
       nameAuthor: nameAuthor,
       profileDesc: desc,

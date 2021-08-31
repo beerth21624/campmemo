@@ -8,7 +8,7 @@ const NewPost = () => {
   const [post, setPost] = useState([]);
   useEffect(() => {
     const fetchPost = async () => {
-      const postData = await axios.get('/post/new');
+      const postData = await axios.get('/api/post/new');
       setPost(postData.data);
     };
     fetchPost();

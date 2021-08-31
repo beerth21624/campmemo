@@ -169,7 +169,7 @@ function PostEditor() {
   const handleSave = async (e) => {
     e.preventDefault();
     try {
-      const createPost = await axios.post('post', {
+      const createPost = await axios.post('/api/post', {
         title: title,
         desc: desc.current.value,
         photo: filePic,

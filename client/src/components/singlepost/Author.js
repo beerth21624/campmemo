@@ -63,7 +63,7 @@ const Author = ({ author }) => {
 
   useEffect(() => {
     const fetchUser = async () => {
-      const user = await axios.get('/user/author/' + author);
+      const user = await axios.get('/api/user/author/' + author);
       setAuthor(user.data);
     };
     fetchUser();

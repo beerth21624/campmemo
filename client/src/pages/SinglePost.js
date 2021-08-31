@@ -39,7 +39,7 @@ const Post = () => {
   useEffect(() => {
     const fetchPost = async () => {
       try {
-        const res = await axios.get('/post/' + path);
+        const res = await axios.get('/api/post/' + path);
         setPost(res.data);
       } catch (err) {}
     };

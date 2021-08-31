@@ -115,10 +115,10 @@ const Profile = () => {
           setMyUser(true);
         }
       }
-      const userdata = await axios.get('/user/userprofile/' + UserInput);
+      const userdata = await axios.get('/api/user/userprofile/' + UserInput);
       setProfileData(userdata.data);
       const posts = await axios.get(
-        '/post/profile/' + UserInput + '?limit=' + limit
+        '/api/post/profile/' + UserInput + '?limit=' + limit
       );
       setPost(posts.data);
       setUpdated(false);

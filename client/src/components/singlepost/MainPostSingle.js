@@ -138,7 +138,7 @@ const MainPostSingle = ({ post }) => {
   }, [post, pathUser, user]);
 
   const handleSave = async () => {
-    const saved = await axios.put('/post/update/' + post._id, {
+    const saved = await axios.put('/api/post/update/' + post._id, {
       title,
       desc,
       photo: previewImg,
