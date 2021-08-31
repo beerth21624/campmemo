@@ -122,15 +122,3 @@ export default function ItemFeature({ post }) {
     </ThemeProvider>
   );
 }
-
-// font-family: "Varela Round", sans-serif;
-//   font-size: 14px;
-//   color: #444;
-//   line-height: 24px;
-//   margin-top: 15px;
-//   overflow: auto;
-//   word-break: break-all;
-//   text-overflow: ellipsis;
-//   display: -webkit-box;
-//   -webkit-line-clamp: 4;
-//   -webkit-box-orient: vertical;

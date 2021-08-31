@@ -71,6 +71,7 @@ export default function Feature1() {
               color="primary"
               disableElevation
               style={{ borderRadius: '40px' }}
+              href="/editor"
             >
               <Typography color="textSecondary">CREATE YOUR POST</Typography>
             </Button>

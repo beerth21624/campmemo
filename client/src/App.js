@@ -25,7 +25,7 @@ function App() {
           {!user ? <Register /> : <Redirect to="/" />}
         </Route>
         <Route path="/editor">{user ? <PostEditor /> : <Login />}</Route>
-        <Route path="/post/:postId/:postAuthor">
+        <Route path="/post/:postId">
           <SinglePost />
         </Route>
         <Route path="/profile">
