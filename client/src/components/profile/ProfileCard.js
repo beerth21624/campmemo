@@ -171,14 +171,15 @@ const ProfileCard = ({ post, myUser, updated }) => {
               style={{ gap: 15 }}
               className={classes.buttonEdit}
             >
-              <Button
-                variant="contained"
-                color="primary"
-                className={classes.button}
-                href={'/post/' + post._id + '/' + post.userId}
-              >
-                <CreateIcon />
-              </Button>
+              <Link to={'/post/' + post._id + '/' + post.userId}>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  className={classes.button}
+                >
+                  <CreateIcon />
+                </Button>
+              </Link>
               <Button
                 variant="contained"
                 color="secondary"

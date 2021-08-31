@@ -9,6 +9,7 @@ import { Paper } from '@material-ui/core';
 import { Typography } from '@material-ui/core';
 import { Box } from '@material-ui/core';
 import { Button } from '@material-ui/core';
+import { Link } from 'react-router-dom';
 
 const theme = createTheme({
   palette: {
@@ -65,17 +66,18 @@ export default function Feature1() {
       <Grid item md={6}>
         <Paper className={classes.root} elevation={24}>
           <div className={classes.title}>Share your camping story...</div>
-          <Box display="flex" flexDirection="column" className={classes.box}>
-            <Button
-              variant="contained"
-              color="primary"
-              disableElevation
-              style={{ borderRadius: '40px' }}
-              href="/editor"
-            >
-              <Typography color="textSecondary">CREATE YOUR POST</Typography>
-            </Button>
-          </Box>
+          <Link to="/editor" className="link">
+            <Box display="flex" flexDirection="column" className={classes.box}>
+              <Button
+                variant="contained"
+                color="primary"
+                disableElevation
+                style={{ borderRadius: '40px' }}
+              >
+                <Typography color="textSecondary">CREATE YOUR POST</Typography>
+              </Button>
+            </Box>
+          </Link>
         </Paper>
       </Grid>
     </ThemeProvider>
