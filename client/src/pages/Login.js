@@ -140,7 +140,7 @@ export default function SignIn() {
               </Button>
               <Grid item container justifyContent="flex-end">
                 <Grid item>
-                  <Link href="/register" variant="body2" color="secondary">
+                  <Link to="/register" variant="body2" color="secondary">
                     {"Don't have an account? Sign Up"}
                   </Link>
                 </Grid>
