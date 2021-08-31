@@ -4,10 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "dev": "concurrently \"npm run server\" \"npm run view\" ",
     "start": "node server.js",
     "server": "nodemon server.js",
-    "view": "npm start --prefix view",
-    "dev": "concurrently \"npm run server\" \"npm run view\" "
+    "view": "npm start --prefix view"
   },
   "author": "",
   "license": "ISC",
