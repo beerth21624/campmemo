@@ -51,14 +51,16 @@ const Navbar = () => {
   const [menu, setMenu] = useState(null);
 
   useEffect(() => {
-    const callUser = async () => {
-      const authorUser = await GetUserContextService(user);
-      authorUser && setUserData(authorUser.nameAuthor);
-      authorUser && setImage(authorUser.profilePic);
-      authorUser && setUserId(authorUser._id);
-      setMenu(null);
-    };
-    callUser();
+    if (user) {
+      const callUser = async () => {
+        const authorUser = await GetUserContextService(user);
+        authorUser && setUserData(authorUser.nameAuthor);
+        authorUser && setImage(authorUser.profilePic);
+        authorUser && setUserId(authorUser._id);
+        setMenu(null);
+      };
+      callUser();
+    }
   }, [user]);
 
   const handleClick = (event) => {
