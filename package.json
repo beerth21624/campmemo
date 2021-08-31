@@ -7,7 +7,9 @@
     "dev": "concurrently \"npm run server\" \"npm run view\" ",
     "start": "node server.js",
     "server": "nodemon server.js",
-    "view": "npm start --prefix view"
+    "view": "npm start --prefix view",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false &&  cd view && npm install && npm build "
+
   },
   "author": "",
   "license": "ISC",

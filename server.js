@@ -10,6 +10,11 @@ const userRoute = require('./routers/user');
 
 dotenv.config();
 app.use(express.json());
+app.use(express.static(path.join(__dirname, 'view', 'build')));
+
+app.use('/*', (req, res) => {
+  res.send(path.join(__dirname, 'view', 'build', 'index.html'));
+});
 
 mongoose
   .connect(process.env.MONGO_URL, {
