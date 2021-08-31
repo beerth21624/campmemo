@@ -30,7 +30,7 @@ app.use('/api/private/', privateRoute);
 app.use('/api/category/', categoryRoute);
 app.use('/api/user', userRoute);
 
-app.listen(5000, () => {
+app.listen(process.env.PORT || 5000, () => {
   console.log('backend start');
 });
 
