@@ -36,7 +36,7 @@ const Main = () => {
 
   useEffect(() => {
     const fetchPost = async () => {
-      const res = await axios.get('/api//post?page=' + page);
+      const res = await axios.get('/api/post?page=' + page);
       setPosts(res.data.data);
       setPageCount(res.data.pages);
     };
