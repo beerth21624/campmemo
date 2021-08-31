@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import Link from '@material-ui/core/Link';
+import { Link } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import { createTheme, makeStyles } from '@material-ui/core/styles';
@@ -172,7 +172,7 @@ export default function SignUp() {
               </Button>
               <Grid container justifyContent="flex-end">
                 <Grid item>
-                  <Link to="login" variant="body2">
+                  <Link to="/login" variant="body2" className="link">
                     Already have an account? Login
                   </Link>
                 </Grid>
