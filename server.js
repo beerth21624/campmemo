@@ -37,8 +37,15 @@ app.use('/api/post/', postRoute);
 app.use('/api/private/', privateRoute);
 app.use('/api/category/', categoryRoute);
 app.use('/api/user', userRoute);
-app.all('*', function (req, res) {
-  res.redirect('/index.html');
+app.get('/*', function (req, res) {
+  res.sendFile(
+    path.join(__dirname, '/client/build/public/index.html'),
+    function (err) {
+      if (err) {
+        res.status(500).send(err);
+      }
+    }
+  );
 });
 
 if (process.env.NODE_ENV === 'production') {
