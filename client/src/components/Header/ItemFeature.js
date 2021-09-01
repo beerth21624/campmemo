@@ -57,7 +57,7 @@ const useStyles = makeStyles((theme) => ({
       paddingTop: '11rem',
     },
     [theme.breakpoints.only('lg')]: {
-      paddingTop: '10rem',
+      paddingTop: '9rem',
     },
     [theme.breakpoints.only('xl')]: {
       paddingTop: '11rem',

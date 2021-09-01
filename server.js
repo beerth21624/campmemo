@@ -37,6 +37,9 @@ app.use('/api/post/', postRoute);
 app.use('/api/private/', privateRoute);
 app.use('/api/category/', categoryRoute);
 app.use('/api/user', userRoute);
+app.all('*', function (req, res) {
+  res.redirect('/index.html');
+});
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '/client/build')));
